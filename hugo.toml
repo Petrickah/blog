@@ -1,6 +1,6 @@
 baseURL = 'https://petretiberiu.dev/'
 locale = 'en-us'
-title = 'Blog (titlu provizoriu — test deploy 2026-08-17)'
+title = 'Blog (titlu provizoriu)'
 theme = 'PaperMod'
 
 [params]
