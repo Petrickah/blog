@@ -1,30 +1,26 @@
 # Blog
 
-Blog personal de portofoliu (Hugo static site) — articole despre proiectele din
-acest monorepo și, eventual, despre traiectoria profesională a autorului.
-Deploy public pe Cloudflare Pages; conținutul draft trăiește separat de cel
-public (vezi `CLAUDE.md` din acest folder pentru convenția de branch-uri).
+Personal portfolio blog (Hugo static site) — articles about the projects in
+this monorepo and, eventually, about the author's professional path.
+Deployed on Cloudflare Workers (static assets).
 
 ## Overview
 
-Site static generat cu [Hugo](https://gohugo.io/). Conținutul e alimentat
-direct din `content/`, care e și expus în vault-ul Obsidian al autorului ca
-habitat (`09_Blog`, symlink relativ) — un singur set de fișiere, fără
-sincronizare separată.
+Static site generated with [Hugo](https://gohugo.io/), theme
+[PaperMod](https://github.com/adityatelange/hugo-PaperMod) (provisional).
 
 ## Setup
 
 ```bash
-# Hugo extended, instalat local (binar din github.com/gohugoio/hugo/releases)
-hugo version
+hugo version   # tested with v0.165.0
 ```
 
 ## Usage
 
 ```bash
-hugo server --buildDrafts   # preview local, cu draft-uri
-hugo                        # build public (fără draft-uri) -> public/
+hugo server   # local preview
+hugo build    # production build -> public/
 ```
 
-Build-ul CI (Jenkins pentru branch-ul `drafts`, GitHub Actions pentru `main`)
-e documentat în `CLAUDE.md`.
+Deployed automatically on push to `main` via Cloudflare Workers' GitHub
+integration (`wrangler.jsonc` + `build.sh`).
