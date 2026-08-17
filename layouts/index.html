@@ -1,0 +1,111 @@
+{{- define "main" }}
+<div class="cv-page">
+
+{{- with .Params.summary }}
+<section class="cv-section">
+  <h2>Summary</h2>
+  <p>{{ . }}</p>
+</section>
+{{- end }}
+
+{{- with .Params.experience }}
+<section class="cv-section">
+  <h2>Professional Experience</h2>
+  {{- range . }}
+  <div class="cv-entry">
+    <h3>{{ .role }} <span class="cv-entry-company">| {{ .company }}</span></h3>
+    <p class="cv-entry-period">{{ .period }}</p>
+    {{- with .summary }}<p>{{ . }}</p>{{- end }}
+    {{- with .highlights }}
+    <ul>
+      {{- range . }}
+      <li>{{ . | markdownify }}</li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+  {{- end }}
+</section>
+{{- end }}
+
+{{- with .Params.education }}
+<section class="cv-section">
+  <h2>Education</h2>
+  {{- range . }}
+  <div class="cv-entry">
+    <h3>{{ .degree }}</h3>
+    <p class="cv-entry-period">{{ .school }} | {{ .period }}</p>
+    {{- with .note }}<p>{{ . }}</p>{{- end }}
+  </div>
+  {{- end }}
+</section>
+{{- end }}
+
+{{- with .Params.skills }}
+<section class="cv-section">
+  <h2>Technical Skills</h2>
+  <div class="cv-card-grid">
+    {{- range . }}
+    <div class="cv-card">
+      <h4>{{ .category }}</h4>
+      <p>{{ delimit .items ", " }}</p>
+    </div>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{- with .Params.languages }}
+<section class="cv-section">
+  <h2>Languages</h2>
+  <div class="cv-card-grid">
+    {{- range . }}
+    <div class="cv-card">
+      <h4>{{ .name }}</h4>
+      <p>{{ .level }}</p>
+    </div>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{- $projects := where site.RegularPages "Section" "projects" }}
+{{- $projects = where $projects "Params.featured" true }}
+{{- $projects = $projects.ByDate.Reverse }}
+{{- with $projects }}
+<section class="cv-section">
+  <h2>Personal Projects</h2>
+  <div class="cv-card-stack">
+    {{- range . }}
+    <a class="cv-card" href="{{ .Permalink }}">
+      <div class="cv-card-row">
+        <h4>{{ .Title }}{{- with .Params.subtitle }} <span class="cv-entry-company">({{ . }})</span>{{- end }}</h4>
+        <span class="cv-entry-period">{{ .Date.Format "January 2006" }}</span>
+      </div>
+      <p>{{ .Params.summary | default (.Summary | plainify | htmlUnescape) }}</p>
+    </a>
+    {{- end }}
+  </div>
+  <p><a href="{{ "projects/" | relURL }}">View all projects &rarr;</a></p>
+</section>
+{{- end }}
+
+{{- $featured := where site.RegularPages "Section" "posts" }}
+{{- $featured = $featured.ByDate.Reverse }}
+{{- $featured = first 3 $featured }}
+{{- with $featured }}
+<section class="cv-section">
+  <h2>Recent Articles</h2>
+  <div class="cv-card-grid">
+    {{- range . }}
+    <a class="cv-card cv-article" href="{{ .Permalink }}">
+      <h4>{{ .Title }}</h4>
+      <p class="cv-entry-period">{{ .Date.Format "2 January 2006" }}</p>
+    </a>
+    {{- end }}
+  </div>
+  <p><a href="{{ "posts/" | relURL }}">View all articles &rarr;</a></p>
+</section>
+{{- end }}
+</div>
+{{- end }}

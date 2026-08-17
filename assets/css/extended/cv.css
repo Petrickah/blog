@@ -1,0 +1,138 @@
+.cv-page {
+  font-size: 0.9em;
+}
+
+.cv-persistent-header {
+  margin-bottom: 1.5em;
+}
+
+.cv-headline {
+  font-size: 1.6em;
+  margin-bottom: 0.1em;
+}
+
+.cv-headline a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cv-headline a:hover {
+  text-decoration: underline;
+}
+
+.cv-subheadline {
+  color: var(--secondary);
+  font-size: 1.1em;
+  margin: 0 0 0.4em;
+}
+
+.cv-contacts {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin: 0.5em 0 1.5em;
+}
+
+.cv-contacts a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.cv-section {
+  margin: 2em 0;
+}
+
+.cv-section h2 {
+  font-size: 1.3em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+.cv-entry {
+  margin-bottom: 1.5em;
+}
+
+.cv-entry h3 {
+  font-size: 1.05em;
+  margin-bottom: 0.1em;
+}
+
+.cv-entry-company {
+  font-weight: normal;
+  color: var(--secondary);
+}
+
+.cv-entry-period {
+  color: var(--secondary);
+  font-size: 0.9em;
+  margin: 0.2em 0 0.5em;
+}
+
+.cv-entry ul {
+  margin: 0.5em 0 0 1.2em;
+}
+
+.cv-entry li {
+  margin-bottom: 0.4em;
+}
+
+/* Card treatment (Skills, Projects, Recent Articles) — same bordered-box
+   pattern as NightFolio's skills/projects/languages partials, adapted to
+   PaperMod's own CSS variables so dark/light mode stays consistent. */
+
+.cv-card-grid {
+  display: grid;
+  gap: 0.8em;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.cv-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.cv-card {
+  display: block;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.9em 1em;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.cv-card h4 {
+  margin: 0 0 0.3em;
+  font-size: 1em;
+  color: var(--content);
+}
+
+.cv-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8em;
+}
+
+.cv-card-row h4 {
+  margin: 0;
+}
+
+.cv-card-row .cv-entry-period {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.cv-card p {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 0.95em;
+}
+
+
+a.cv-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

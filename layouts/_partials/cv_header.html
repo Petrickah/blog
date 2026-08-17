@@ -1,0 +1,14 @@
+{{- $home := site.Home }}
+<div class="cv-page cv-persistent-header">
+  <h1 class="cv-headline"><a href="{{ "" | relURL }}">{{ $home.Title }}</a></h1>
+  {{- with $home.Params.role }}
+  <p class="cv-subheadline">{{ . }}</p>
+  {{- end }}
+  {{- with $home.Params.contacts }}
+  <div class="cv-contacts">
+    {{- range . }}
+    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+</div>
