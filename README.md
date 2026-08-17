@@ -22,5 +22,6 @@ hugo server   # local preview
 hugo build    # production build -> public/
 ```
 
-Deployed automatically on push to `main` via Cloudflare Workers' GitHub
-integration (`wrangler.jsonc` + `build.sh`).
+Deployed automatically on push to `main` via GitHub Actions
+(`.github/workflows/deploy.yml`), which runs `wrangler deploy` against
+`wrangler.jsonc` + `build.sh`.
