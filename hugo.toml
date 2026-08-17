@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://petretiberiu.dev/'
 locale = 'en-us'
 title = 'Blog (titlu provizoriu)'
 theme = 'PaperMod'
