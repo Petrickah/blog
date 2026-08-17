@@ -1,0 +1,11 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Blog (titlu provizoriu)'
+theme = 'PaperMod'
+
+[params]
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
