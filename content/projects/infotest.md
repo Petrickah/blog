@@ -15,7 +15,7 @@ Submissions are compiled and executed in isolated subprocesses: GCC handles C/C+
 
 ## Extensibility
 
-Rather than hardcoding features, we built a plugin/theme system on top of Laravel: an `app` folder hosts plugin and theme files, each registered as a class in `plugins.php`; theme files are stored in the database and resolved at request time. The same system exposes a RESTful API path for anything a plugin shouldn't need direct app access for.
+Rather than hardcoding features, we built a plugin/theme system on top of Laravel: an `app` folder hosts plugin and theme files, each registered as a class in `plugins.php`; theme files are stored in the database and resolved at request time. The same system exposes a RESTful API path for anything a plugin shouldn't need direct app access for — the same pattern used in [EvoCMS](/projects/evocms/), an earlier personal project built around the same plugin/theme architecture.
 
 ## Deployment
 
