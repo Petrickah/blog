@@ -13,6 +13,8 @@ Cindy's Adventures — Spiders in Australia was my entry for [Game Off 2021](htt
 
 Cynthia fights with a staff, casting one of four elemental spells — water, fire, lightning, or the arcane "ultimate" — bound to number keys (or face buttons on a controller), on top of a basic staff attack on the primary trigger. Movement is standard third-person: WASD or a stick, with sprint, crouch, and jump. Get overwhelmed and you die — the game respawns you back into a maze that's still full of spiders.
 
+The spell-casting system was the feature that mattered most in this prototype — everything else (movement, the spiders, the environment) existed to give the spells something to be used against.
+
 ## Built under a jam deadline
 
 This was built with Unreal Engine 4 (5.0 was in Early Access at the time) in C++, alone, inside the jam's roughly one-month window. Time management mattered as much as the code — the CV note from that period mentions a Gantt chart for the schedule and a Kanban board to split the work into pieces small enough to actually finish before submission.

@@ -21,6 +21,6 @@ Once the maze is fully generated, the program runs Dijkstra's shortest-path algo
 
 ## Rendering
 
-Drawing happens through a small custom console engine (`evoConsoleGameEngine.h`) — Windows-only, built directly on the Win32 console API. Its color enum and block-character pixel set strongly resemble javidx9's well-known `olcConsoleGameEngine` (widely used in his C++ tutorials at the time) — there's no explicit credit in the header, so this is an inference from the code's shape, not a confirmed attribution.
+Drawing happens through a small custom console engine (`evoConsoleGameEngine.h`) — Windows-only, built directly on the Win32 console API, adapted from javidx9's (OneLoneCoder) `olcConsoleGameEngine`, widely used at the time in his C++ tutorials.
 
 Controls: `C` regenerates a new random maze, `V` skips the generation animation and jumps straight to the finished maze, and `Escape` exits, cleaning up the maze array, stack, and graph.
