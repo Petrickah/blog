@@ -9,6 +9,23 @@ theme = 'PaperMod'
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
+  description = 'Tiberiu Petre — Software Engineer specializing in backend, systems, and infrastructure. Portfolio, projects, and technical writing.'
+
+  [params.schema]
+    publisherType = 'Person'
+    sameAs = [
+      'https://linkedin.com/in/tiberiupetre',
+      'https://github.com/Petrickah',
+      'https://tryhackme.com/p/Petrickah',
+    ]
+
+  [[params.socialIcons]]
+    name = 'linkedin'
+    url = 'https://linkedin.com/in/tiberiupetre'
+
+  [[params.socialIcons]]
+    name = 'github'
+    url = 'https://github.com/Petrickah'
 
 [[menu.main]]
   name = 'Home'
