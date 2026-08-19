@@ -11,6 +11,9 @@ theme = 'PaperMod'
   ShowCodeCopyButtons = true
   description = 'Tiberiu Petre — Software Engineer specializing in backend, systems, and infrastructure. Portfolio, projects, and technical writing.'
 
+  [params.footer]
+    text = 'Written with AI assistance — see [about](/about/).'
+
   [params.schema]
     publisherType = 'Person'
     sameAs = [
@@ -41,3 +44,8 @@ theme = 'PaperMod'
   name = 'Projects'
   url = '/projects/'
   weight = 3
+
+[[menu.main]]
+  name = 'About'
+  url = '/about/'
+  weight = 4
