@@ -3,6 +3,11 @@ locale = 'en-us'
 title = 'Tiberiu Petre - Software Engineer'
 theme = 'PaperMod'
 
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+  series = 'series'
+
 [params]
   defaultTheme = 'auto'
   ShowReadingTime = true
