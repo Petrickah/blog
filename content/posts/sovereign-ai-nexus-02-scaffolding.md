@@ -3,7 +3,7 @@ title: "Sovereign AI Nexus, Part 2: What Broke While Scaffolding"
 date: 2026-08-20
 draft: false
 series: ["sovereign-ai-nexus"]
-tags: ["fastapi", "docker", "kaniko", "ci-cd", "jenkins"]
+tags: ["fastapi", "docker", "docker-build", "ci-cd", "jenkins"]
 ---
 
 The first post in this series was about the decision — why I'm starting small, why the earlier project ideas never got built. This one is about the day I actually wrote code, and about what broke along the way — because almost nothing worked on the first try, and I think that part is more interesting than if it had gone perfectly.
