@@ -8,6 +8,10 @@ theme = 'PaperMod'
   category = 'categories'
   series = 'series'
 
+[services]
+  [services.googleAnalytics]
+    id = 'G-13GGVBJQN8'
+
 [params]
   defaultTheme = 'auto'
   ShowReadingTime = true
