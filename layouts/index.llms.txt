@@ -1,0 +1,21 @@
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+This site is written with AI assistance under human review — see {{ "about/" | absURL }} for how. Facts, code, and technical claims are checked against real sources (repositories, commit history) rather than invented; unverifiable claims are marked as such rather than smoothed over.
+
+## Posts
+
+{{- range where site.RegularPages "Section" "posts" }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Params.summary | default (.Summary | plainify | htmlUnescape) | truncate 200 | htmlUnescape }}
+{{- end }}
+
+## Projects
+
+{{- range where site.RegularPages "Section" "projects" }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Params.summary | default (.Summary | plainify | htmlUnescape) | truncate 200 | htmlUnescape }}
+{{- end }}
+
+## Optional
+
+- [About]({{ "about/" | absURL }})

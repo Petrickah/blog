@@ -4,6 +4,15 @@ title = 'Tiberiu Petre - Software Engineer'
 theme = 'PaperMod'
 enableRobotsTXT = true
 
+[outputs]
+  home = ['HTML', 'RSS', 'LLMS']
+
+[outputFormats.LLMS]
+  mediaType = 'text/plain'
+  baseName = 'llms'
+  isPlainText = true
+  notAlternative = true
+
 [taxonomies]
   tag = 'tags'
   category = 'categories'
