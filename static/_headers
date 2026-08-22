@@ -3,9 +3,12 @@
 
 /*.xml
   ! Content-Type
+  Content-Type: application/xml; charset=utf-8
 
 /*.css
   ! Content-Type
+  Content-Type: text/css; charset=utf-8
 
 /robots.txt
   ! Content-Type
+  Content-Type: text/plain; charset=utf-8
