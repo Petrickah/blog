@@ -2,6 +2,7 @@ baseURL = 'https://petretiberiu.dev/'
 locale = 'en-us'
 title = 'Tiberiu Petre - Software Engineer'
 theme = 'PaperMod'
+enableRobotsTXT = true
 
 [taxonomies]
   tag = 'tags'
