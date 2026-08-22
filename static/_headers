@@ -12,3 +12,11 @@
 /robots.txt
   ! Content-Type
   Content-Type: text/plain; charset=utf-8
+
+/*.png
+  ! Content-Type
+  Content-Type: image/png
+
+/*.ico
+  ! Content-Type
+  Content-Type: image/x-icon
