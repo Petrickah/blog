@@ -1,5 +1,5 @@
 ---
-title: "Tiberiu Petre"
+title: "Tiberiu Petre — Software Engineer"
 role: "Software Engineer — Backend & Systems"
 contacts:
   - label: LinkedIn
