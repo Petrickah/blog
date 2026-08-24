@@ -38,6 +38,20 @@
   text-decoration: underline;
 }
 
+.cv-contacts .cv-cta {
+  background: var(--primary);
+  color: var(--theme);
+  padding: 0.3em 0.9em;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cv-contacts .cv-cta:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
 .cv-section {
   margin: 2em 0;
 }

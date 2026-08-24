@@ -9,6 +9,9 @@
     {{- range . }}
     <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>
     {{- end }}
+    {{- if ne $.RelPermalink "/contact/" }}
+    <a href="{{ "contact/" | relURL }}" class="cv-cta">Let's Build Together</a>
+    {{- end }}
   </div>
   {{- end }}
 </div>
