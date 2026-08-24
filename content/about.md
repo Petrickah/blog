@@ -10,3 +10,7 @@ The articles here — project retrospectives, technical write-ups — are drafte
 What I do hold the line on: the underlying facts. Code samples, technical claims, and project history are checked against real sources — repositories, READMEs, git history, my own memory when nothing else survives — not invented to fill a gap. When something can't be verified, the article says so directly, rather than smoothing it into false confidence. If you read a line like "this is a reconstruction from memory, unverified," that hedge is deliberate, not filler.
 
 I'm writing this page because I'd rather say it plainly than have a reader sense something's off about the prose and wonder if they're being misled.
+
+---
+
+If you're reading this while evaluating me for a role: I'm currently exploring backend, systems, and infrastructure engineering positions. [Get in touch](/contact/), or find me on [LinkedIn](https://linkedin.com/in/tiberiupetre) and [GitHub](https://github.com/Petrickah).

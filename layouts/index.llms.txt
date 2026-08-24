@@ -4,6 +4,10 @@
 
 This site is written with AI assistance under human review — see {{ "about/" | absURL }} for how. Facts, code, and technical claims are checked against real sources (repositories, commit history) rather than invented; unverifiable claims are marked as such rather than smoothed over.
 
+## Currently
+
+Exploring backend, systems, and infrastructure engineering roles. If this site is relevant to an opportunity, get in touch: {{ "contact/" | absURL }}
+
 ## Posts
 
 {{- range where site.RegularPages "Section" "posts" }}
@@ -19,3 +23,9 @@ This site is written with AI assistance under human review — see {{ "about/" |
 ## Optional
 
 - [About]({{ "about/" | absURL }})
+- [Contact]({{ "contact/" | absURL }})
+{{- range site.Params.socialIcons }}
+{{- $label := .name | title }}
+{{- if eq .name "linkedin" }}{{ $label = "LinkedIn" }}{{ else if eq .name "github" }}{{ $label = "GitHub" }}{{ end }}
+- [{{ $label }}]({{ .url }})
+{{- end }}
