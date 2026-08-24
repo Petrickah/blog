@@ -28,6 +28,7 @@
 
 .cv-contacts {
   display: flex;
+  align-items: center;
   gap: 1em;
   flex-wrap: wrap;
   margin: 0.5em 0 1.5em;
@@ -41,10 +42,12 @@
 .cv-contacts .cv-cta {
   background: var(--primary);
   color: var(--theme);
-  padding: 0.3em 0.9em;
+  padding: 0.2em 0.7em;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.9em;
+  line-height: 1.6;
 }
 
 .cv-contacts .cv-cta:hover {
