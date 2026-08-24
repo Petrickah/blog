@@ -13,4 +13,5 @@ RUN if [ "$BUILD_DRAFTS" = "true" ]; then hugo --buildDrafts; else hugo; fi
 
 FROM nginx:alpine
 COPY --from=build /src/public /usr/share/nginx/html
+COPY deploy/nginx-charset.conf /etc/nginx/conf.d/charset.conf
 EXPOSE 80
