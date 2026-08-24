@@ -2,6 +2,7 @@
 title: "Cindy's Adventures — Spiders in Australia"
 subtitle: "game jam entry, Unreal Engine"
 date: 2021-11-02
+weight: 50
 featured: false
 summary: "A Game Off 2021 jam entry — an action-adventure chapter where a spell-casting sorceress fights off a spider infestation in rural Australia, built solo in Unreal Engine within the jam's one-month window."
 repo: "https://github.com/Petrickah/game-off-2021"

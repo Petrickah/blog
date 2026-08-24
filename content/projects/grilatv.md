@@ -2,6 +2,7 @@
 title: "GrilaTV"
 subtitle: "university project, Databases & DBMS course"
 date: 2020-02-05
+weight: 40
 featured: true
 summary: "Relational database design and normalization for a TV-guide domain, redocumented across two semester iterations, Dockerized deployment. Applied, academic-scope schema-design experience."
 repo: "https://github.com/Petrickah/BazaDate-GrilaTV"

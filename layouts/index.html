@@ -71,7 +71,7 @@
 
 {{- $projects := where site.RegularPages "Section" "projects" }}
 {{- $projects = where $projects "Params.featured" true }}
-{{- $projects = $projects.ByDate.Reverse }}
+{{- $projects = $projects.ByWeight }}
 {{- with $projects }}
 <section class="cv-section">
   <h2>Personal Projects</h2>

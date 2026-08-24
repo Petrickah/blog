@@ -2,6 +2,7 @@
 title: "EvoAgents"
 subtitle: "bachelor's thesis"
 date: 2021-10-12
+weight: 20
 featured: true
 summary: "AI framework using behavior trees for NPC decision-making — an action-adventure game with procedurally generated terrain, built as a bachelor's thesis."
 repo: "https://github.com/Petrickah/EvoAgents"

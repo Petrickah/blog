@@ -2,6 +2,7 @@
 title: "Optimization Algorithms for Camera Coverage"
 subtitle: "university project"
 date: 2021-10-12
+weight: 70
 featured: false
 summary: "Comparing Hill Climbing (with and without retrace) against Simulated Annealing for maximizing three ceiling cameras' coverage area — Simulated Annealing won."
 repo: "https://github.com/Petrickah/Optimization"
