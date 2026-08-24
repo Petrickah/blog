@@ -76,7 +76,12 @@
 <section class="cv-section">
   <h2>Personal Projects</h2>
   <div class="cv-card-stack">
+    {{- $shownOlder := false }}
     {{- range . }}
+    {{- if and (not $shownOlder) (lt .Date.Year 2026) }}
+    {{- $shownOlder = true }}
+    <p class="cv-projects-note">Everything below predates the years at Ubisoft — see <a href="{{ "posts/four-years-at-ubisoft/" | relURL }}">Four Years at Ubisoft</a> for what happened in between.</p>
+    {{- end }}
     <a class="cv-card" href="{{ .Permalink }}">
       <div class="cv-card-row">
         <h4>{{ .Title }}{{- with .Params.subtitle }} <span class="cv-entry-company">({{ . }})</span>{{- end }}</h4>

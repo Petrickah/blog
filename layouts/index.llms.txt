@@ -8,6 +8,8 @@ This site is written with AI assistance under human review — see {{ "about/" |
 
 Exploring backend, systems, and infrastructure engineering roles. If this site is relevant to an opportunity, get in touch: {{ "contact/" | absURL }}
 
+For the fuller story — four years at Ubisoft, why the pivot happened, and why it isn't a fully resolved one — see [Four Years at Ubisoft]({{ "posts/four-years-at-ubisoft/" | absURL }}).
+
 ## Posts
 
 {{- range where site.RegularPages "Section" "posts" }}

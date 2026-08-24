@@ -42,6 +42,7 @@ experience:
       - "**Internal Tooling**: Designed and developed internal desktop tools and data-driven utilities (C++/C#) to stabilize system behavior and support production workflows."
       - "**Systems Engineering**: Worked on low-level systems with a focus on memory management, multithreading, and risk mitigation in coordination with technical leadership; validated changes through personal testing and QA/DevTest collaboration during code review, prior to submission."
       - "**Delivery**: Credited on multiple shipped Assassin's Creed titles (*Assassin's Creed Shadows*, *Assassin's Creed Black Flag Resynced*) through contributions to shared internal systems and tooling; supported *Assassin's Creed Hexe* on a short feature (Pressure Plates)."
+      - "[Read the full story →](/posts/four-years-at-ubisoft/)"
 education:
   - degree: "Bachelor of Science in Computer Science"
     school: "Petroleum-Gas University of Ploiești"

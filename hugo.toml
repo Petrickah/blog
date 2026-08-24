@@ -29,6 +29,7 @@ enableRobotsTXT = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
   ShowShareButtons = true
+  ShowFullTextinRSS = true
   description = 'Tiberiu Petre — Software Engineer specializing in backend, systems, and infrastructure. Portfolio, projects, and technical writing.'
 
   [params.footer]

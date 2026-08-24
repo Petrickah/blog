@@ -149,6 +149,13 @@
   font-size: 0.95em;
 }
 
+.cv-projects-note {
+  color: var(--secondary);
+  font-size: 0.85em;
+  font-style: italic;
+  margin: 0.4em 0;
+}
+
 
 a.cv-card:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
