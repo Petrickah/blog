@@ -26,8 +26,6 @@ skills:
     items: ["Memory Management", "Multithreading", "Async Programming"]
   - category: Tools & Environments
     items: ["Git", "Docker", "CI/CD"]
-  - category: AI-Assisted Development
-    items: ["MCP", "Agentic AI", "Self-directed"]
 languages:
   - name: Romanian
     level: Native
