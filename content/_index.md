@@ -1,6 +1,6 @@
 ---
 title: "Tiberiu Petre — Software Engineer"
-role: "Software Engineer — Backend & Systems"
+role: "Software Engineer"
 contacts:
   - label: LinkedIn
     url: https://linkedin.com/in/tiberiupetre
@@ -9,13 +9,14 @@ contacts:
   - label: TryHackMe
     url: https://tryhackme.com/p/Petrickah
 summary: >
-  Software engineer with 4 years of experience building systems and internal
-  tooling for a global AAA game studio (Ubisoft), with a focus on
-  data-driven architecture, concurrency, and production-pipeline stability.
-  Strong foundation in OOP, systems design, and memory/multithreading
-  management, gained on large-scale C++/C# codebases used across
-  internationally distributed teams. Currently broadening into backend/API
-  development through self-directed projects and study.
+  Software Engineer with 4 years of professional experience building
+  production systems, internal tooling, and data-driven architectures at a
+  global AAA game studio (Ubisoft), across internationally distributed
+  teams. Strong foundation in OOP, systems design, concurrency, and
+  memory/multithreading management on large-scale C++/C# codebases.
+  Experienced across backend development, AI-assisted systems, and game
+  technology, with a focus on solving complex engineering problems and
+  building reliable software.
 skills:
   - category: Languages
     items: ["C++", "C#", "Python", "Bash", "SQL (MySQL)"]

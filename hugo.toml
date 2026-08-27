@@ -30,7 +30,7 @@ enableRobotsTXT = true
   ShowCodeCopyButtons = true
   ShowShareButtons = true
   ShowFullTextinRSS = true
-  description = 'Tiberiu Petre — Software Engineer specializing in backend, systems, and infrastructure. Portfolio, projects, and technical writing.'
+  description = 'Tiberiu Petre — Software Engineer. Portfolio, projects, and technical writing.'
 
   [params.footer]
     text = 'Written with AI assistance — see [about](/about/).'
