@@ -3,6 +3,7 @@ title: "Sovereign AI Nexus, Part 1: Starting Small, On Purpose"
 date: 2026-08-20
 draft: false
 series: ["sovereign-ai-nexus"]
+categories: ["DevLogs"]
 tags: ["portfolio", "fastapi", "react", "docker", "career"]
 ---
 

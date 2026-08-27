@@ -3,6 +3,7 @@ title: "Sovereign AI Nexus, Part 4: Shipping v1"
 date: 2026-08-26
 draft: false
 series: ["sovereign-ai-nexus"]
+categories: ["DevLogs"]
 tags: ["fastapi", "react", "docker", "postgresql", "testing", "pytest"]
 ---
 

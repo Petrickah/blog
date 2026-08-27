@@ -2,6 +2,7 @@
 title: "EvoPASS — An Android Password Manager (2019, Retrospective)"
 date: 2019-10-01
 draft: false
+categories: ["Technical Explorations"]
 tags: ["android", "kotlin", "cryptography", "security"]
 ---
 

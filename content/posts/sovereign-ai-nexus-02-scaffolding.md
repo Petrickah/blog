@@ -3,6 +3,7 @@ title: "Sovereign AI Nexus, Part 2: What Broke While Scaffolding"
 date: 2026-08-20
 draft: false
 series: ["sovereign-ai-nexus"]
+categories: ["DevLogs"]
 tags: ["fastapi", "docker", "docker-build", "ci-cd", "jenkins"]
 ---
 

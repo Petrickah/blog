@@ -2,6 +2,7 @@
 title: "Four Years at Ubisoft: Anvil Pipeline, Pressure Plates, and What Came After"
 date: 2026-08-24
 draft: false
+categories: ["Game Development"]
 tags: ["career", "ubisoft", "assassins-creed", "gamedev"]
 ---
 

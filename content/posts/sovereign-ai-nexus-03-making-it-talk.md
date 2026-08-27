@@ -3,6 +3,7 @@ title: "Sovereign AI Nexus, Part 3: Making It Actually Talk"
 date: 2026-08-26
 draft: false
 series: ["sovereign-ai-nexus"]
+categories: ["DevLogs"]
 tags: ["fastapi", "postgresql", "claude-code", "debugging", "backend"]
 ---
 

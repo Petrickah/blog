@@ -2,6 +2,7 @@
 title: "Developing a Ray Tracer Using Compute Shaders"
 date: 2022-01-21
 draft: false
+categories: ["Game Development"]
 tags: ["ray-tracing", "graphics", "unity", "compute-shaders", "lighting"]
 ---
 
