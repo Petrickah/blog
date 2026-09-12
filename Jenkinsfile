@@ -8,7 +8,7 @@ pipeline {
     // into K3s's `previews` namespace, which no longer exists. The preview
     // feature is intentionally offline until a Docker-based replacement is
     // designed (Valul 2/3) — see Homelab Redux project note.
-    agent any
+    agent { label 'built-in' }
     environment {
         IMAGE_NAME = 'blog'
         REGISTRY   = '192.168.1.21:5000'
