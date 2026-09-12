@@ -1,23 +1,17 @@
 pipeline {
-    agent {
-        kubernetes {
-            inheritFrom 'kaniko'
-            yaml '''
-              apiVersion: v1
-              kind: Pod
-              spec:
-                serviceAccountName: previews-deployer
-                containers:
-                  - name: kubectl
-                    image: alpine/k8s:1.36.2
-                    command: ["sleep"]
-                    args: ["9999999"]
-            '''
-        }
-    }
+    // Docker-CI migration (Homelab Redux Valul 1): Kaniko/K8s retired along
+    // with the K3s cluster. Jenkins now runs as a Docker container on the
+    // same host as the registry, with /var/run/docker.sock mounted, so
+    // image builds go through the host's own Docker daemon directly.
+    //
+    // "Deploy preview" stage removed (not ported): it did `kubectl apply`
+    // into K3s's `previews` namespace, which no longer exists. The preview
+    // feature is intentionally offline until a Docker-based replacement is
+    // designed (Valul 2/3) — see Homelab Redux project note.
+    agent any
     environment {
         IMAGE_NAME = 'blog'
-        REGISTRY   = '192.168.1.20:5000'
+        REGISTRY   = '192.168.1.21:5000'
     }
     stages {
         stage('Checkout') {
@@ -28,28 +22,12 @@ pipeline {
         }
         stage('Build & Push') {
             steps {
-                container('kaniko') {
-                    script {
-                        def buildDrafts = (env.BRANCH_NAME == 'drafts') ? 'true' : 'false'
-                        sh """
-                        /kaniko/executor \
-                          --context="\$(pwd)" \
-                          --dockerfile=Dockerfile \
-                          --build-arg BUILD_DRAFTS=${buildDrafts} \
-                          --destination=${REGISTRY}/${IMAGE_NAME}:${env.BRANCH_NAME}-${env.BUILD_NUMBER} \
-                          --insecure --skip-tls-verify
-                        """
-                    }
-                }
-            }
-        }
-        stage('Deploy preview') {
-            when { branch 'drafts' }
-            steps {
-                container('kubectl') {
+                script {
+                    def buildDrafts = (env.BRANCH_NAME == 'drafts') ? 'true' : 'false'
+                    def tag = "${REGISTRY}/${IMAGE_NAME}:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
                     sh """
-                    sed 's|IMAGE_TAG_PLACEHOLDER|${env.BRANCH_NAME}-${env.BUILD_NUMBER}|' deploy/preview.yaml | kubectl apply -f -
-                    kubectl -n previews rollout status deployment/blog-preview --timeout=120s
+                    docker build --build-arg BUILD_DRAFTS=${buildDrafts} -t ${tag} .
+                    docker push ${tag}
                     """
                 }
             }
