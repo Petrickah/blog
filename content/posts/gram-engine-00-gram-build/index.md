@@ -1,5 +1,5 @@
 ---
-title: "Gram Engine — Episodul 0: Gram Build"
+title: "Gram Engine — Episode 0: Gram Build"
 date: 2026-09-16
 draft: false
 tags: [game-engine, vulkan, cplusplus, rust, gram-build, cmake, vcpkg, fetchcontent, ron-format, passion-project, blog-series]
