@@ -2,6 +2,7 @@
 title: "Gram Engine — Episode 0: Gram Build"
 date: 2026-09-16
 draft: false
+series: ["gram-engine"]
 tags: [game-engine, vulkan, cplusplus, rust, gram-build, cmake, vcpkg, fetchcontent, ron-format, passion-project, blog-series]
 summary: "Wave 0 of Gram Engine started as a simple build CLI and grew into a universal build tool for C++ (CMake, FetchContent, vcpkg) and Rust (Cargo) projects — self-hosting, cross-compilation, module cross-linking, all from a single .ron definition. The first step before writing any rendering code, now usable for any project."
 ---
