@@ -2,32 +2,46 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Single-branch model since 2026-09-17.** Previously `drafts` (private, Gitea-only) and `main` (public) were separate orphan branches, with promotion done by cherry-picking `drafts` commits onto `main`. That split is retired — see "Why the two-branch split is gone" below. `drafts` still exists on Gitea as a frozen historical branch (last commit `fd5ba9e`) but is no longer used; all work happens directly on `main`.
+
+**Moved 2026-09-17** from `05_Projects/code/blog/` to `09_Blog/blog/` — remotes (`origin` = Gitea, `github` = GitHub) unchanged, only the local path moved. This repo now sits alongside `09_Blog/drafts/` (the draft notes) and `09_Blog/CLAUDE.md` (the consolidated working rules for the whole blog project — read that file first, this one is the Hugo-repo-specific detail underneath it).
+
 ## Commands
 
-- `hugo server --buildDrafts` — local preview, drafts included.
+- `hugo server --buildDrafts --baseURL http://localhost:1313/` — local preview, drafts included. The `--baseURL` override matters: `hugo.toml`'s `baseURL` is the production URL, and without the override PaperMod's absolute links jump straight from the local preview to `petretiberiu.dev` on click.
 - `hugo` — production build (drafts excluded) into `public/`.
 - No linter/test suite; correctness is "does it build and render."
 
 ## Architecture
 
-Plain Hugo site: `content/` (articles), `themes/PaperMod` (theme, provisional
-— swap freely, it's not a locked-in design choice), `hugo.toml` (config),
-`Dockerfile` (multi-stage: builds the Hugo site, then copies `public/` into
-an nginx image).
+Plain Hugo site: `content/` (articles), `themes/PaperMod` (theme, provisional — swap freely, it's not a locked-in design choice), `hugo.toml` (config), `Dockerfile` (multi-stage: builds the Hugo site, then copies `public/` into an nginx image — currently unused by any CI, kept in case a container deploy target comes back; safe to remove if it doesn't). New article ideas are drafted separately, in the sibling `09_Blog/drafts/` folder (real folder, not a symlink into this repo — redesigned 2026-08-19 after an earlier symlink approach hit an unfixable Syncthing exclusion issue) — a draft becomes a real file here only through an explicit promotion step, not automatic sync. `09_Blog/blog/scripts/publish_blog.py` generates that file from a draft's `## Draft` section and its structured `## Promovare` frontmatter block; see `09_Blog/CLAUDE.md` for the full promotion flow. See the vault's own `09_Blog/Blog (Portofoliu, Hugo + Cloudflare Pages)` note for the full history.
 
-**Who writes a new article's raw voice (decided 2026-08-29)**: Hermes Agent,
-not this Claude Code instance — see that project note's "Cine scrie vocea
-articolelor" section. This repo's own job is promotion only (rewrite as a
-real Hugo file, branch discipline, CI, deploy) — don't originate a new
-article's prose here even if asked to "write a blog post," unless the
-request is explicitly about editing/formatting an already-drafted piece.
+**Who writes a new article's raw voice (decided 2026-08-29)**: Hermes Agent, not this Claude Code instance — see that project note's "Cine scrie vocea articolelor" section. This repo's own job is promotion only (rewrite as a real Hugo file, commit/push, CI, deploy) — don't originate a new article's prose here even if asked to "write a blog post," unless the request is explicitly about editing/formatting an already-drafted piece.
 
-Note: `themes/PaperMod` is a git submodule. Run
-`git submodule update --init --recursive` after cloning.
+**Verbatim text policy at promotion (decided 2026-09-02)**: when rewriting a draft note's `## Draft` section into a real Hugo content file, copy the prose **verbatim** — no stylistic rewrites, no rephrasing, no inversions, no inserted em-dashes or other "polish," even when the edit looks purely technical. The only permitted changes are strictly structural/technical: Hugo frontmatter, Markdown/Hugo syntax (shortcodes, image/footnote refs), formatting the build actually requires. The text has already gone through a human-in-the-loop revision pass with Tiberiu (see the `blog-draft-generator` Hermes skill, `04_Governance/Hermes Skill — Blog Draft Generator.md`) — he owns the final wording, this repo owns only the container/format. If a passage genuinely needs a change (an obvious typo, a broken link), flag it to Tiberiu explicitly instead of silently "fixing" it. Reason this exists: past promotions left a detectable Claude Code stylistic signature in text Tiberiu had already personally edited — the goal is "human-written, AI-assisted," not text that reads as AI-polished. `scripts/publish_blog.py` enforces the mechanical half of this automatically — it copies `## Draft` into the Hugo file byte-for-byte, no rewriting logic at all — but it can't judge whether a flagged typo/link genuinely needs a human decision, so that part of the policy still applies by hand.
 
-## Branches
+Note: `themes/PaperMod` is itself a git submodule (nested inside this submodule). A plain `git clone` of this repo does **not** initialize it — run `git submodule update --init --recursive` after cloning, or `themes/` will be empty.
 
-This repo's `main` branch (the only one published here) is deployed via
-GitHub Actions on push. Content is written and previewed on a separate,
-non-public branch before being promoted here article by article — draft
-material never enters this branch's history.
+## Publishing (single branch, no cherry-pick)
+
+- **`main`** (remote `origin` = Gitea, remote `github` = `git@github.com:Petrickah/blog.git`): the only branch, published to both. Every commit here is public-facing the moment it's pushed — there is no longer a private staging branch, so treat a generated article as final before committing it, not before pushing it.
+- **Publishing an article** (see `09_Blog/CLAUDE.md` for the full flow, this is the git-mechanics half):
+  1. Generate the Hugo file from the draft note: `python3 scripts/publish_blog.py <source_id>` (from repo root). Copies `## Draft` verbatim and the frontmatter from the draft's `## Promovare` block. Never touches git.
+  2. Local sanity build: `hugo --buildDrafts -D` (or just `hugo` if the article isn't itself `draft: true`) and skim the rendered output — this is the one safeguard kept from the old two-branch model, cheap and catches a script/parsing bug before it's public, distinct from whether Tiberiu already approved the wording (he did, in the vault, before this stage).
+  3. `git add`/`git commit` the generated file(s) on `main`.
+  4. `git push origin main` (Gitea) **and** `git push github main:main` (public) — both, every time. Forgetting the second push just means GitHub is stale.
+- **Do not cherry-pick anything from the old `drafts` branch onto `main`.** It's a frozen historical branch with unrelated (orphan) history — there's nothing there that should still land here.
+
+### Why the two-branch split is gone (2026-09-17)
+
+The original reason for splitting `drafts`/`main` was that a single branch mirrored wholesale would leak unpublished article text into public git history via `draft: true/false` frontmatter alone. That's no longer the actual risk: content only reaches this repo at all *after* the vault-level draft (`09_Blog/drafts/*.md`) has already gone through Hermes's mandatory human-in-the-loop revision loop and Tiberiu's explicit "gata" confirmation — the vault layer is now the draft stage, and by the time `publish_blog.py` runs, the text is meant to be final. A second, git-level draft/public split on top of that was redundant. The branch split's other original purpose — a Jenkins-built preview on a K3s namespace, served on `drafts` pushes — was retired entirely on 2026-09-13 (see the CI section below); nothing left depends on a second branch to preview from. The `baseURL`-per-branch workaround for the local-preview-jumps-to-production annoyance is also gone, replaced by `hugo server --baseURL` override (see Commands above) — simpler, and doesn't need a branch either.
+
+## CI
+
+- No CI on ordinary commits. The Jenkins multibranch job (Kaniko build + K8s deploy to a `previews` namespace) was retired 2026-09-13 — it depended on the K3s cluster removed during Homelab Redux, and had been building Docker images for a deploy target that no longer existed. Preview locally instead (see Commands above).
+- **GitHub / Cloudflare** (live, 2026-08-17): repo `github.com/Petrickah/blog` (public, `main` default, first commit SSH-signature verified). Deploy is `.github/workflows/deploy.yml` on GitHub, `cloudflare/wrangler-action@v3` (`wranglerVersion: '4'` pinned explicitly — the action's own default install resolved to Wrangler 3.90.0, which doesn't support an assets-only Worker with no `main` entry-point in `wrangler.jsonc` and fails with "Missing entry-point"). Secrets `CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_ACCOUNT_ID` set on the `Petrickah/blog` GitHub repo. **Not** Cloudflare's native Git integration — that was tried first, worked, but ran the build hidden inside Cloudflare's own dashboard with nothing visible in the repo's Actions tab, so it was replaced. The whole Cloudflare Workers project got deleted (not just disconnected) during that switch, which also removed the `petretiberiu.dev` custom domain attachment — recreated via `PUT /accounts/{id}/workers/domains` (not through the dashboard).
+- **Gitea Actions gotcha**: `.github/workflows/deploy.yml` also exists on the Gitea copy of `main` — Gitea Actions picked it up automatically and tried to run it with no runner registered, producing a false red X. Fixed by disabling Actions on the Gitea repo (`has_actions: false`). Keep Gitea Actions disabled on this repo.
+
+Real gotcha from the retired Jenkins/Kaniko pipeline, still relevant if the `Dockerfile` is ever built again (Hugo-on-Alpine, not generic knowledge): `hugo_extended` binaries are dynamically linked against glibc and fail with a misleading "not found" on Alpine (musl) unless `libc6-compat`/`libstdc++` are installed; a Hugo site with zero theme/layouts produces no `index.html` at all (silent — no build error). Full list, including the now-retired K8s-deploy-specific gotchas, in the project note's "Note tehnice de implementare" section.
+
+**Historical, no longer applicable**: the literal tag/term "kaniko" in a content's frontmatter (`sovereign-ai-nexus-02-scaffolding.md`, 2026-08-20) used to break the build — Hugo generates a taxonomy page at `public/tags/kaniko/`, and Kaniko (the builder behind the now-retired Jenkins CI) treated any path containing "kaniko" specially, breaking the image snapshot. The current GitHub Actions pipeline (`checkout` + `wrangler deploy`) doesn't use Kaniko at all, so this can't recur here.
