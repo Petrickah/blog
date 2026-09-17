@@ -67,6 +67,30 @@ def extract_draft_body(body: str) -> str:
     return text.strip("\n") + "\n"
 
 
+# Romanian-specific diacritics — a cheap, zero-dependency signal that the
+# extracted body still has Romanian text (an editorial note, a teaser)
+# that was never meant to be published. Not a general language detector:
+# it only catches leftover Romanian, the actual risk this vault produces,
+# since drafts are written in whatever language is easiest and the
+# publish policy is verbatim copy — nothing strips or rewrites content.
+ROMANIAN_DIACRITICS = set("ăâîșțĂÂÎȘȚ")
+
+
+def check_language(body: str, allow_non_english: bool) -> None:
+    found = sorted({c for c in body if c in ROMANIAN_DIACRITICS})
+    if found and not allow_non_english:
+        raise SystemExit(
+            "Extracted draft body contains Romanian diacritics "
+            f"({''.join(found)}) — this blog publishes in English only. "
+            "Likely cause: '## Draft' has leftover non-English text (an "
+            "editorial note to Tiberiu, a teaser) that isn't meant for "
+            "publication — see 09_Blog/blog/CLAUDE.md, '## Draft' must "
+            "contain only the final publication-ready text. Fix the draft "
+            "note and re-run, or pass --allow-non-english if this is "
+            "genuinely intentional."
+        )
+
+
 def extract_yaml_block(promovare_text: str) -> str:
     match = re.search(r"```yaml\n(.*?)\n```", promovare_text, re.DOTALL)
     if not match:
@@ -128,6 +152,7 @@ def main() -> None:
     parser.add_argument("draft", help="source_id, filename, or path of a draft under ../drafts/")
     parser.add_argument("--dry-run", action="store_true", help="print the generated file instead of writing it")
     parser.add_argument("--force", action="store_true", help="overwrite an existing target file")
+    parser.add_argument("--allow-non-english", action="store_true", help="skip the Romanian-diacritics language check")
     args = parser.parse_args()
 
     draft_path = find_draft(args.draft)
@@ -141,7 +166,9 @@ def main() -> None:
         extract_yaml_block(extract_section(body, "Promovare"))
     )
     target = resolve_target(hugo_path)
-    output = build_frontmatter(frontmatter_fields) + extract_draft_body(body)
+    draft_body = extract_draft_body(body)
+    check_language(draft_body, args.allow_non_english)
+    output = build_frontmatter(frontmatter_fields) + draft_body
 
     if args.dry_run:
         print(f"--- {target.relative_to(BLOG_DIR)} ---")
