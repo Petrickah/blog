@@ -7,6 +7,8 @@ tags: [game-engine, vulkan, cplusplus, rust, gram-build, imgui, ecs, cross-platf
 summary: "Wave 1 of Gram Engine in two halves: a Vulkan 1.3 triangle running on Windows, Linux and macOS with an ImGui editor, and a Rust gameplay layer that reloads while the game runs, just a stateless cdylib, generational IDs, components generated from .ron schemas, and runtime-checked borrows across the FFI boundary."
 ---
 
+![The Hello Triangle running in the Gram editor: outliner, inspector and systems panel around a Vulkan triangle](hello-triangle-editor.png)
+
 In Episode 0 I built a build tool. A good one which grew from a Hello World compiler into something that rebuilds itself, handles C++ and Rust projects, cross-compiles for three platforms and manages dependencies.
 
 But a build tool is not a game engine. After Wave 0 shipped, I still had exactly zero things on a screen.
