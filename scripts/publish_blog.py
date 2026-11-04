@@ -49,9 +49,18 @@ def find_draft(identifier: str) -> Path:
     raise SystemExit(f"No draft found for '{identifier}' under {DRAFTS_DIR}")
 
 
+# Top-level headings the draft template itself owns. A section ends only at
+# one of these, not at any `## ` line: the article body under `## Draft` may
+# legitimately use `##` headings of its own (Hugo renders the title as H1),
+# and cutting there silently dropped most of the text (found 2026-11-04,
+# Gram Engine Episode 1).
+TEMPLATE_HEADINGS = r"(?:Țintă|Surse|Draft|Promovare|🔭|🎙)"
+
+
 def extract_section(body: str, heading: str) -> str:
     pattern = re.compile(
-        rf"^## {re.escape(heading)}\s*\n(.*?)(?=^## |\Z)", re.DOTALL | re.MULTILINE
+        rf"^## {re.escape(heading)}\s*\n(.*?)(?=^## {TEMPLATE_HEADINGS}|\Z)",
+        re.DOTALL | re.MULTILINE,
     )
     match = pattern.search(body)
     if not match:
