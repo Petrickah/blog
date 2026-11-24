@@ -63,7 +63,9 @@
       <guid>{{ .Permalink }}</guid>
       <description>{{ with .Description | html }}{{ . }}{{ else }}{{ .Summary | html }}{{ end -}}</description>
       {{- if and site.Params.ShowFullTextinRSS .Content }}
-      <content:encoded>{{ (printf "<![CDATA[%s]]>" .Content) | safeHTML }}</content:encoded>
+      {{- /* Root-relative src/href made absolute: a reader importing the feed elsewhere (dev.to) resolves them against its own domain. */}}
+      {{- $content := .Content | replaceRE `(src|href)="/` (printf `$1="%s/` (strings.TrimSuffix "/" site.BaseURL)) }}
+      <content:encoded>{{ (printf "<![CDATA[%s]]>" $content) | safeHTML }}</content:encoded>
       {{- end }}
     </item>
     {{- end }}
