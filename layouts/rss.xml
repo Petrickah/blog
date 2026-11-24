@@ -63,8 +63,22 @@
       <guid>{{ .Permalink }}</guid>
       <description>{{ with .Description | html }}{{ . }}{{ else }}{{ .Summary | html }}{{ end -}}</description>
       {{- if and site.Params.ShowFullTextinRSS .Content }}
+      {{- /* rssTeaser: true in a post's front matter sends only the text before its <!--teaser--> line (an HTML comment,
+             invisible on the site) and a link to the rest; without it the feed carries the whole post. Not <!--more-->:
+             that would also replace the `summary` field on list cards and in the meta description. */}}
+      {{- $marker := "<!--teaser-->" }}
+      {{- $teaser := and .Params.rssTeaser (strings.Contains .RawContent $marker) }}
+      {{- $content := .Content }}
+      {{- if $teaser }}
+      {{- $content = .RenderString (dict "display" "block") (index (split .RawContent $marker) 0) }}
+      {{- $content = printf `%s<p><a href="%s">Continue reading on petretiberiu.dev →</a></p>` $content .Permalink }}
+      {{- else }}
+      {{- $series := "" }}
+      {{- with .GetTerms "series" }}{{ $series = printf ` The rest of the series is <a href="%s">there too</a>.` (index . 0).Permalink }}{{ end }}
+      {{- $content = printf `%s<hr><p><em>Originally published on <a href="%s">petretiberiu.dev</a>.%s</em></p>` $content .Permalink $series }}
+      {{- end }}
       {{- /* Root-relative src/href made absolute: a reader importing the feed elsewhere (dev.to) resolves them against its own domain. */}}
-      {{- $content := .Content | replaceRE `(src|href)="/` (printf `$1="%s/` (strings.TrimSuffix "/" site.BaseURL)) }}
+      {{- $content = $content | replaceRE `(src|href)="/` (printf `$1="%s/` (strings.TrimSuffix "/" site.BaseURL)) }}
       <content:encoded>{{ (printf "<![CDATA[%s]]>" $content) | safeHTML }}</content:encoded>
       {{- end }}
     </item>
