@@ -1,6 +1,6 @@
 ---
 title: "Gram Engine - Interlude 2.5: Optimizing for Real Hardware"
-date: 2026-11-24
+date: 2026-11-24T12:00:00+02:00
 draft: false
 series: ["gram-engine"]
 tags: [game-engine, vulkan, cplusplus, hlsl, ray-tracing, bvh, fsr, steamos, game-development]

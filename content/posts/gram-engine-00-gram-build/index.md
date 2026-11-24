@@ -1,10 +1,32 @@
 ---
 title: "Gram Engine — Episode 0: Gram Build"
 date: 2026-09-16
+lastmod: 2026-11-24
 draft: false
+rssTeaser: true
 series: ["gram-engine"]
 tags: [game-engine, vulkan, cplusplus, rust, gram-build, cmake, vcpkg, fetchcontent, ron-format, passion-project, blog-series]
 summary: "Wave 0 of Gram Engine started as a simple build CLI and grew into a universal build tool for C++ (CMake, FetchContent, vcpkg) and Rust (Cargo) projects — self-hosting, cross-compilation, module cross-linking, all from a single .ron definition. The first step before writing any rendering code, now usable for any project."
+teaser: |
+  Before I wrote any rendering code, I started with a tool to build Gram Engine. Gram Build's first job was to turn its source code into something that ran.
+
+  Over time, it grew beyond that job. I could use it for other C++ and Rust projects too, not just a game engine. This is the story of how a tool built for Gram Engine became useful well beyond it.
+
+  The reason was practical. Before the engine could open a window or draw a triangle, its source had to become a program that ran. I wanted to understand that step and make it repeatable as the project grew. So I began with a small tool for building the engine instead of starting with the renderer.
+
+  The first useful version built one C++ file or one Rust file. Hello World ran on Linux and Windows. That was a real milestone, but it also showed the limit: one file is enough to prove a build can work, not enough for a real engine. The project would have many files and rely on outside libraries.
+
+  The turn came when I noticed a mismatch. I had described Gram Build as a tool that could build itself, but I was still using a separate program to build Gram. I did not want the claim to outrun what it actually did. I changed the project so Gram could treat its own source like another project, then used it to build itself. It worked. The tool had proved its central promise on its own code.
+
+  As the engine grew, it needed more than one-file examples. I could wait until the next engine work demanded support for larger C++ projects and outside libraries, or solve the build problem first. I chose to do it early because the missing support would otherwise block the work I wanted to start. Gram Build expanded because the project put real problems in front of it, not because a universal tool had been in the plan from day one.
+
+  The first problems were small but revealing. A new project ended up in the wrong place, and a different one failed with an error that looked like a missing dependency. In both cases, the obvious explanation was wrong. I learned to check the starting assumptions before adding another fix.
+
+  Later, I found that a cleanup step could remove far more than I intended. Another build failure came from a missing tool on the machine, not a broken compiler. The lesson was to follow each problem to what actually happened, and to test the behavior a person expects rather than just the outcome the code seemed to produce.
+
+  By the end, Gram Build had grown beyond its original home. I could also use it for a separate C++ socket-programming project with nothing to do with an engine or a game. The tool could start, build and run projects, and it had learned to support work beyond the engine that gave it a reason to exist.
+
+  I did not set out to build a universal tool. I kept solving the next real problem: first getting a build to work, then making the tool build itself, then helping it handle larger projects. What began as groundwork for Gram Engine became useful beyond games. Read the full article in [Episode 0 on petretiberiu.dev](https://petretiberiu.dev/posts/gram-engine-00-gram-build/).
 ---
 
 Every game engine starts somewhere. Most start with a window, a triangle, and a dream. I started with a build tool.
