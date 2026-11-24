@@ -54,7 +54,7 @@ def find_draft(identifier: str) -> Path:
 # legitimately use `##` headings of its own (Hugo renders the title as H1),
 # and cutting there silently dropped most of the text (found 2026-11-04,
 # Gram Engine Episode 1).
-TEMPLATE_HEADINGS = r"(?:Țintă|Surse|Draft|Promovare|🔭|🎙)"
+TEMPLATE_HEADINGS = r"(?:Țintă|Surse|Draft|Teaser|Promovare|🔭|🎙)"
 
 
 def extract_section(body: str, heading: str) -> str:
@@ -66,6 +66,21 @@ def extract_section(body: str, heading: str) -> str:
     if not match:
         raise SystemExit(f"Section '## {heading}' not found in draft")
     return match.group(1).strip("\n")
+
+
+def extract_teaser(body: str) -> str | None:
+    """The optional `## Teaser` section: a short retelling of the article for
+    the RSS feed (and dev.to, which imports it) when the post is published
+    with `rssTeaser: true`. Absent, empty or still the template's bracketed
+    placeholder means no teaser."""
+    try:
+        text = extract_section(body, "Teaser")
+    except SystemExit:
+        return None
+    text = text.strip()
+    if not text or text.startswith("["):
+        return None
+    return text
 
 
 def extract_draft_body(body: str) -> str:
@@ -140,8 +155,14 @@ def parse_promotion_yaml(yaml_text: str) -> tuple[str, dict[str, str]]:
     return hugo_path, frontmatter
 
 
-def build_frontmatter(fields: dict[str, str]) -> str:
-    lines = ["---", *(f"{key}: {value}" for key, value in fields.items()), "---"]
+def build_frontmatter(fields: dict[str, str], teaser: str | None = None) -> str:
+    lines = ["---", *(f"{key}: {value}" for key, value in fields.items())]
+    if teaser:
+        # A YAML literal block: the Markdown stays as written, each line
+        # indented two spaces (blank lines stay blank).
+        lines.append("teaser: |")
+        lines.extend(f"  {line}" if line.strip() else "" for line in teaser.splitlines())
+    lines.append("---")
     return "\n".join(lines) + "\n\n"
 
 
@@ -177,7 +198,10 @@ def main() -> None:
     target = resolve_target(hugo_path)
     draft_body = extract_draft_body(body)
     check_language(draft_body, args.allow_non_english)
-    output = build_frontmatter(frontmatter_fields) + draft_body
+    teaser = extract_teaser(body)
+    if teaser:
+        check_language(teaser, args.allow_non_english)
+    output = build_frontmatter(frontmatter_fields, teaser) + draft_body
 
     if args.dry_run:
         print(f"--- {target.relative_to(BLOG_DIR)} ---")
