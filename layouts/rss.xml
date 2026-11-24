@@ -68,8 +68,8 @@
              The teaser never shows on the site. */}}
       {{- $content := .Content }}
       {{- if and .Params.rssTeaser .Params.teaser }}
+      {{- /* The teaser's own last sentence links to the full post (template, ## Teaser), so no link is added here. */}}
       {{- $content = .RenderString (dict "display" "block") .Params.teaser }}
-      {{- $content = printf `%s<p><a href="%s">Continue reading on petretiberiu.dev →</a></p>` $content .Permalink }}
       {{- else }}
       {{- $series := "" }}
       {{- with .GetTerms "series" }}{{ $series = printf ` The rest of the series is <a href="%s">there too</a>.` (index . 0).Permalink }}{{ end }}
