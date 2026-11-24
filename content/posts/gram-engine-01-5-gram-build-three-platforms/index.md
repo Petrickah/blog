@@ -1,5 +1,5 @@
 ---
-title: "Gram Engine - Episode 1.5: Gram Build on Three Platforms"
+title: "Gram Engine - Interlude 1.5: Gram Build on Three Platforms"
 date: 2026-11-24T10:00:00+02:00
 draft: false
 rssTeaser: true
@@ -29,7 +29,7 @@ teaser: |
 
   The last platform was a Legion Go S running SteamOS. I first thought I could sideload the game like an Android app, but SteamOS was Linux, not Android, and its official Devkit client would not install on my Mac. I connected over SSH and used an Ubuntu container on the handheld to build the project. It ran on the Legion's AMD GPU. The useful result was that the same project built on a Mac, a Windows machine and a Linux handheld.
 
-  Gram Build did not replace the tools it brought together. It learned enough to make one engine project build in different places, so I could get back to the part I actually wanted to test: the ray tracer. Read the full story in [Episode 1.5 on petretiberiu.dev](https://petretiberiu.dev/posts/gram-engine-01-5-gram-build-three-platforms/).
+  Gram Build did not replace the tools it brought together. It learned enough to make one engine project build in different places, so I could get back to the part I actually wanted to test: the ray tracer. Read the full story in [Interlude 1.5 on petretiberiu.dev](https://petretiberiu.dev/posts/gram-engine-01-5-gram-build-three-platforms/).
 ---
 
 Episode 1 put a triangle on screen. [Episode 2 is already published](https://petretiberiu.dev/posts/gram-engine-02-ray-tracing-in-one-weekend-on-the-gpu/), and it takes that engine into the book's ray tracer. It comes before Episode 2: the build work that let me test the ray tracer on more than my Mac.
