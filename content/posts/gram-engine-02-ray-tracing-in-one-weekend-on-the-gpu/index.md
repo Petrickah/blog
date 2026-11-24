@@ -7,8 +7,6 @@ tags: [game-engine, vulkan, cplusplus, rust, hlsl, ray-tracing, compute-shader, 
 summary: "Episode 2 builds Vulkan groundwork for a GPU ray tracer, ports Ray Tracing in One Weekend, implements depth of field through a lens and as a post-process, and moves the spheres into the engine's World and Rust systems."
 ---
 
-# Gram Engine - Episode 2: Ray Tracing in One Weekend on the GPU
-
 In Episode 1, I got a triangle on screen and Rust code that could change while the game was running. But the triangle still lived inside the shader. It had no camera, no scene to belong to, and nothing gameplay code could move.
 
 Episode 2 takes four steps: Vulkan groundwork, a GPU version of the book's path tracer, two approaches to depth of field, and one step beyond the book—moving the scene into the engine's own world so Rust could move it.

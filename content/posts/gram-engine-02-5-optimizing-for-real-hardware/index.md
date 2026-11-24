@@ -7,8 +7,6 @@ tags: [game-engine, vulkan, cplusplus, hlsl, ray-tracing, bvh, fsr, steamos, gam
 summary: "The Gram Engine 2.5 interlude measures the ray tracer's BVH, profiler and upscaling work on an M4 Pro, then follows deployment and debugging on a Legion Go S and a Windows device."
 ---
 
-# Gram Engine - Interlude 2.5: Optimizing for Real Hardware
-
 [Episode 2](/posts/gram-engine-02-ray-tracing-in-one-weekend-on-the-gpu/) ends with the book's cover scene running at about 8 frames per second (FPS) on my M4 Pro. Before the next episode moved from spheres to triangles, I wanted to know where the time went and make the engine usable beyond my development Mac.
 
 This interlude has two halves. First, I measured and optimized the ray tracer on the M4 Pro. Then I took the engine to a Legion Go S and a Windows device. The Legion Go S was a real target, not the trigger: the BVH was already part of the path toward triangles, and the slow Mac frame was what made me start measuring.

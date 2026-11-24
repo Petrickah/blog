@@ -32,8 +32,6 @@ teaser: |
   Gram Build did not replace the tools it brought together. It learned enough to make one engine project build in different places, so I could get back to the part I actually wanted to test: the ray tracer. Read the full story in [Episode 1.5 on petretiberiu.dev](https://petretiberiu.dev/posts/gram-engine-01-5-gram-build-three-platforms/).
 ---
 
-# Gram Engine - Episode 1.5: Gram Build on Three Platforms
-
 Episode 1 put a triangle on screen. [Episode 2 is already published](https://petretiberiu.dev/posts/gram-engine-02-ray-tracing-in-one-weekend-on-the-gpu/), and it takes that engine into the book's ray tracer. It comes before Episode 2: the build work that let me test the ray tracer on more than my Mac.
 
 To run the ray tracer on three platforms, Gram Build had to do more than pick a compiler. It needed three build modes with different jobs: Debug for development, Release for the game's own tools, and Final for a clean standalone run. It also needed the right compiler for each system, one IDE project for C++ and Rust, and a Linux handheld to test the whole path.

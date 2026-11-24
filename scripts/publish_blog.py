@@ -83,6 +83,19 @@ def extract_teaser(body: str) -> str | None:
     return text
 
 
+def drop_title_heading(draft_body: str, title: str) -> str:
+    """Drop a leading `# <title>` line: the theme already shows the front
+    matter's title, so a draft that opens with the same heading printed it
+    twice (Gram Engine Episodes 1.5, 2 and 2.5, 2026-11-24), and dev.to's
+    import did the same. Only an exact match of the title goes; any other
+    first line stays untouched."""
+    lines = draft_body.split("\n")
+    if lines and lines[0].startswith("# ") and lines[0][2:].strip() == title.strip().strip('"'):
+        print(f"Dropped the leading '# {lines[0][2:].strip()}': the theme shows the title already")
+        return "\n".join(lines[1:]).lstrip("\n")
+    return draft_body
+
+
 def extract_draft_body(body: str) -> str:
     text = extract_section(body, "Draft")
     fenced = re.match(r"^```markdown\n(.*)\n```\s*$", text, re.DOTALL)
@@ -198,6 +211,7 @@ def main() -> None:
     target = resolve_target(hugo_path)
     draft_body = extract_draft_body(body)
     check_language(draft_body, args.allow_non_english)
+    draft_body = drop_title_heading(draft_body, frontmatter_fields.get("title", ""))
     teaser = extract_teaser(body)
     if teaser:
         check_language(teaser, args.allow_non_english)

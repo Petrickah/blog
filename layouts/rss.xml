@@ -75,6 +75,8 @@
       {{- with .GetTerms "series" }}{{ $series = printf ` The rest of the series is <a href="%s">there too</a>.` (index . 0).Permalink }}{{ end }}
       {{- $content = printf `%s<hr><p><em>Originally published on <a href="%s">petretiberiu.dev</a>.%s</em></p>` $content .Permalink $series }}
       {{- end }}
+      {{- /* Every post that leaves through the feed says how it was written (dev.to imports it). */}}
+      {{- $content = printf `%s<p><em>Drafted with AI assistance from my own notes and code, then edited and fact-checked by me.</em></p>` $content }}
       {{- /* Root-relative src/href made absolute: a reader importing the feed elsewhere (dev.to) resolves them against its own domain. */}}
       {{- $content = $content | replaceRE `(src|href)="/` (printf `$1="%s/` (strings.TrimSuffix "/" site.BaseURL)) }}
       <content:encoded>{{ (printf "<![CDATA[%s]]>" $content) | safeHTML }}</content:encoded>
