@@ -10,6 +10,7 @@
     <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>
     {{- end }}
     <a href="{{ "cv/Tiberiu-Petre-CV.pdf" | relURL }}" target="_blank" rel="noopener">CV (PDF)</a>
+    <a href="{{ "index.xml" | relURL }}" type="application/rss+xml">RSS</a>
     {{- with site.Params.contactEmail }}
     <a href="mailto:{{ . }}">{{ . }}</a>
     {{- end }}
