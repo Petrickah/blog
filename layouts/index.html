@@ -23,6 +23,7 @@
       {{- end }}
     </ul>
     {{- end }}
+    {{- with .note }}<p class="cv-entry-note">{{ . | markdownify }}</p>{{- end }}
   </div>
   {{- end }}
 </section>

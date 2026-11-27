@@ -10,6 +10,10 @@
   </div>
   {{- end }}
 
+  {{- with site.Params.contactEmail }}
+  <p class="contact-direct">Prefer email? Write to <a href="mailto:{{ . }}">{{ . }}</a>.</p>
+  {{- end }}
+
   <form class="contact-form" action="https://formspree.io/f/xqpzvkvy" method="POST">
     <div class="contact-field">
       <label for="contact-name">Name</label>

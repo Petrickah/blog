@@ -149,7 +149,8 @@
   font-size: 0.95em;
 }
 
-.cv-projects-note {
+.cv-projects-note,
+.cv-entry-note {
   color: var(--secondary);
   font-size: 0.85em;
   font-style: italic;

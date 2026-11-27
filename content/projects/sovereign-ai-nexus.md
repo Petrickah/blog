@@ -2,7 +2,7 @@
 title: "Sovereign AI Nexus"
 subtitle: "self-hosted AI chat + artifact platform"
 date: 2026-08-20
-weight: 10
+weight: 20
 featured: true
 summary: "A small, self-hosted FastAPI + PostgreSQL + React platform for AI-assisted chat and generated artifacts — built incrementally, no metered API costs."
 repo: "https://github.com/Petrickah/sovereign-ai-nexus"

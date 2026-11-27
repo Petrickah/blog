@@ -3,10 +3,11 @@ title: "Gram Engine"
 subtitle: "personal game engine — C++ and Rust, built in the open"
 date: 2026-09-17
 lastmod: 2026-11-24
-weight: 20
+weight: 10
 featured: true
 summary: "A personal C++20 and Rust game engine on Vulkan 1.3. Wave 0 built a self-hosting build tool; Wave 1 delivered a cross-platform triangle and reloadable gameplay. Wave 2 is in progress: a compute-shader ray tracer with Rust-driven spheres, BVH, GPU profiling and FSR 1. Triangles and Blender scenes (.obj/.mtl) are next."
 repo: "https://github.com/Petrickah/gram-engine"
+repo_private: true
 ---
 
 Gram Engine is a personal game engine (C++ and Rust, Vulkan), started from rediscovered passion rather than a portfolio obligation. No deadline, no stress. It is structured in **waves**: each wave produces one working artifact plus a devlog post on this blog.

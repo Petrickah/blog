@@ -1,3 +1,7 @@
 {{- with .Params.repo }}
+{{- if $.Params.repo_private }}
+<p><em>Source is in a private repository for now — happy to walk through the code on a call.</em></p>
+{{- else }}
 <p><a href="{{ . }}" target="_blank" rel="noopener noreferrer">View source on GitHub &rarr;</a></p>
+{{- end }}
 {{- end }}

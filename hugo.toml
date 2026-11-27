@@ -18,10 +18,6 @@ enableRobotsTXT = true
   category = 'categories'
   series = 'series'
 
-[services]
-  [services.googleAnalytics]
-    id = 'G-MXNVBB78QM'
-
 [params]
   defaultTheme = 'auto'
   ShowReadingTime = true
@@ -30,6 +26,11 @@ enableRobotsTXT = true
   ShowCodeCopyButtons = true
   ShowShareButtons = true
   ShowFullTextinRSS = true
+  # Cloudflare Web Analytics: cookieless, so no consent banner is needed.
+  # Paste the site token from Cloudflare dashboard → Web Analytics; empty = no analytics.
+  cloudflareAnalyticsToken = ''
+  # Direct contact address shown on /contact/ next to the form; empty = hidden.
+  contactEmail = ''
   description = 'Tiberiu Petre — Software Engineer. Portfolio, projects, and technical writing.'
 
   [params.footer]
