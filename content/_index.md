@@ -11,20 +11,20 @@ contacts:
     url: https://tryhackme.com/p/Petrickah
 summary: >
   Gameplay programmer with 4 years at a global AAA game studio (Ubisoft)
-  on the Assassin's Creed franchise: data-driven gameplay frameworks and
-  internal tooling, across internationally distributed teams. Strong foundation in
-  OOP, concurrency, and memory/multithreading management on large-scale
-  C++/C# codebases. On the side, exploring engine programming with
-  Gram Engine, a personal C++20 and Rust engine on Vulkan 1.3.
+  on the Assassin's Creed franchise: pre-launch bug fixing on Assassin's
+  Creed Shadows, data-driven gameplay code and designer-facing tooling,
+  across internationally distributed teams. On the side, exploring engine
+  programming with Gram Engine, a personal C++20 and Rust engine running
+  on Vulkan 1.3.
 skills:
   - category: Languages
-    items: ["C++", "C#", "Python", "Bash", "SQL (MySQL)"]
-  - category: Software Design
-    items: ["OOP", "Design Patterns", "Data Structures", "Algorithms", "Data-driven Architecture", "REST APIs"]
-  - category: Low-Level Programming
-    items: ["Memory Management", "Multithreading", "Async Programming"]
-  - category: Tools & Environments
-    items: ["Git", "Docker", "CI/CD"]
+    items: ["C++", "Rust", "HLSL"]
+  - category: Gameplay
+    items: ["Data-driven gameplay", "Designer tooling (ImGui)", "Debugging & bug fixing", "Combat & AI"]
+  - category: Graphics & Engine (personal)
+    items: ["Vulkan 1.3", "Compute shaders", "Hot-reloadable gameplay (Rust)", "CMake"]
+  - category: Tools
+    items: ["Git", "Perforce", "Visual Studio", "Jira"]
 languages:
   - name: Romanian
     level: Native
@@ -34,13 +34,15 @@ experience:
   - role: "Junior Gameplay Programmer"
     company: "Ubisoft România"
     period: "July 2022 – May 2026"
-    summary: "Worked on internal tooling and data-driven frameworks supporting the Assassin's Creed franchise's production pipelines, across internationally distributed teams (Ubisoft Quebec, Montreal), within an Agile process (sprint and milestone tracking via Jira)."
+    summary: "Worked on gameplay code, bug fixing and designer-facing tooling for the Assassin's Creed franchise, across internationally distributed teams (Ubisoft Quebec, Montreal), within an Agile process (sprint and milestone tracking via Jira)."
     highlights:
-      - "**Core Architecture & Concurrency**: Audited a legacy framework and drove an extended migration effort toward a modular, data-driven architecture, addressing asynchronous serialization risks in a high-throughput production environment."
-      - "**Internal Tooling**: Designed and developed internal desktop tools and data-driven utilities (C++/C#) to stabilize system behavior and support production workflows."
-      - "**Low-Level Engineering**: Worked on low-level code with a focus on memory management, multithreading, and risk mitigation in coordination with technical leadership; validated changes through personal testing and QA/DevTest collaboration during code review, prior to submission."
-      - "**Delivery**: Credited on multiple shipped Assassin's Creed titles (*Assassin's Creed Shadows*, *Assassin's Creed Black Flag Resynced*) through contributions to shared internal frameworks and tooling."
-    note: "I wrote about these four years in more depth — the RankInfo migration, a short gameplay feature at the end, and what that taught me about how I work best. It's also an honest look at how much of where my career went after it was my own choice versus circumstance, and why gaming hasn't stopped mattering to me because of it. [Read the full story →](/posts/four-years-at-ubisoft/)"
+      - "**Bug Fixing**: About four months of pre-launch bug fixing on *Assassin's Creed Shadows* (Nov 2024 – Mar 2025), across cinematics, the health bar, combat mechanics and AI."
+      - "**Legacy Migration**: Took over a half-finished migration of a legacy gameplay system toward a modular, data-driven design; adapted the existing migration code to the engine's data-versioning layer and investigated serialization deadlocks on forced loading."
+      - "**Internal Tooling**: Built an ImGui panel that let designers visualize and edit combat AI position queries."
+      - "**Gameplay Prototype**: First working prototype of a puzzle mechanic on an unreleased Assassin's Creed project, in about a month including review."
+      - "**Testing**: Validated every feature and fix through my own testing during development, then manual testing by a Development Tester during code review, before submission."
+      - "**Credits**: *Assassin's Creed Shadows*, *Assassin's Creed Black Flag Resynced*."
+    note: "I wrote about these four years in more depth: the migration that stalled, the gameplay mechanic I delivered at the end, and what both taught me about how I work best. [Read the full story →](/posts/four-years-at-ubisoft/)"
 education:
   - degree: "Bachelor of Science in Computer Science"
     school: "Petroleum-Gas University of Ploiești"

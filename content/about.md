@@ -12,7 +12,7 @@ This is where I write down what I build, break, and figure out: project retrospe
 
 ## Where I Come From
 
-Four years of that identity comes from Ubisoft, on Assassin's Creed's Anvil Pipeline team, where I was building systems and internal tooling, not the parts of the game players see directly. I've written about it in more depth in [Four Years at Ubisoft](/posts/four-years-at-ubisoft/): the RankInfo migration, a week spent shipping a mechanic called Pressure Plates, and what both taught me about the conditions I actually work well under.
+Four years of that identity come from Ubisoft, on Assassin's Creed, where I wrote data-driven gameplay code and internal tooling. I've written about it in more depth in [Four Years at Ubisoft](/posts/four-years-at-ubisoft/): a migration that stalled, a mechanic called Pressure Plates, and what both taught me about the conditions I actually work well under.
 
 ## What I'm Building Now
 
