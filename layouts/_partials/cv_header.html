@@ -12,9 +12,6 @@
     {{- with site.Params.contactEmail }}
     <a href="mailto:{{ . }}">{{ . }}</a>
     {{- end }}
-    {{- if ne $.RelPermalink "/contact/" }}
-    <a href="{{ "contact/" | relURL }}" class="cv-cta">Let's Build Together</a>
-    {{- end }}
   </div>
   {{- end }}
 </div>

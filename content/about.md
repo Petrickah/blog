@@ -34,4 +34,4 @@ The publishing side of this is its own small system: a draft branch, CI, cherry-
 
 Expect more of the Sovereign AI Nexus build log, probably something about game development at some point, infrastructure notes, and whatever else I end up spending real time thinking about. The blog evolves with what I'm actually learning and building, not the other way around.
 
-If something here is useful, or you just want to talk about any of it: [get in touch](/contact/), or find me on [LinkedIn](https://linkedin.com/in/tiberiupetre) and [GitHub](https://github.com/Petrickah).
+If something here is useful, or you just want to talk about any of it: [get in touch](mailto:contact@petretiberiu.dev), or find me on [LinkedIn](https://linkedin.com/in/tiberiupetre) and [GitHub](https://github.com/Petrickah).

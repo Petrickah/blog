@@ -1,6 +1,7 @@
 ---
 title: "Tiberiu Petre — Software Engineer"
 role: "Software Engineer"
+aliases: ["/contact/", "/contact-thanks/"]
 contacts:
   - label: LinkedIn
     url: https://linkedin.com/in/tiberiupetre
