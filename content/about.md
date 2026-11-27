@@ -11,9 +11,9 @@ I'm Tiberiu Petre, a gameplay programmer with four years of professional experie
 
 Outside of writing code, I like to play video games. I usually go for story-driven games: Assassin's Creed, Horizon Forbidden West, Life is Strange, NieR Automata, the Tomb Raider Trilogy, Alan Wake II, Control, Cyberpunk 2077, Diablo and Overwatch (since 2017) are my cup of tea. What I like about these games is the story, the quest lines and interactions between the player and the world, alone or in a team.
 
-When I've started to play Overwatch, the hook was the story, before it started to go sideways. But multiplayer games are really about the friends you make along the way, and the fun getting together for just one match before you realize you've lost the entire evening. That is the part I liked most about Overwatch. In theory, at least. Ranked has a way of testing those friendships.
+When I started playing Overwatch, the hook was the story, before it started to go sideways. But multiplayer games are really about the friends you make along the way, and the fun of getting together for just one match before you realize you've lost the entire evening. That is the part I liked most about Overwatch. In theory, at least. Ranked has a way of testing those friendships.
 
-On this blog I write about what I play, build, break, and figure out: project retrospectives, things I'm learning, decisions I made and would maybe make differently now, and sometimes what I play. If a project, an idea, or a mistake taught me something worth keeping, it probably ends up here.
+On this blog I write about what I build, break, and figure out: project retrospectives, things I'm learning, decisions I made and would maybe make differently now, and sometimes what I play. If a project, an idea, or a mistake taught me something worth keeping, it probably ends up here.
 
 ## What I'm Building Now
 
