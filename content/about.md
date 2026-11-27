@@ -6,7 +6,7 @@ ShowToc: true
 
 ## Why This Blog Exists
 
-I'm Tiberiu Petre — Software Engineer. The homepage has the résumé version of that; this page is closer to the why.
+I'm Tiberiu Petre — Gameplay Programmer. The homepage has the résumé version of that; this page is closer to the why.
 
 This is where I write down what I build, break, and figure out: project retrospectives, things I'm learning, decisions I made and would maybe make differently now. If a project, an idea, or a mistake taught me something worth keeping, it probably ends up here.
 

@@ -6,9 +6,9 @@ This site is written with AI assistance under human review — see {{ "about/" |
 
 ## Currently
 
-Exploring backend, systems, and infrastructure engineering roles. If this site is relevant to an opportunity, get in touch: {{ site.Params.contactEmail }}
+Open to gameplay programming roles. If this site is relevant to an opportunity, get in touch: {{ site.Params.contactEmail }}
 
-For the fuller story — four years at Ubisoft, why the pivot happened, and why it isn't a fully resolved one — see [Four Years at Ubisoft]({{ "posts/four-years-at-ubisoft/" | absURL }}).
+For the fuller story — four years at Ubisoft and what came after — see [Four Years at Ubisoft]({{ "posts/four-years-at-ubisoft/" | absURL }}).
 
 ## Posts
 

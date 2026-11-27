@@ -1,6 +1,6 @@
 baseURL = 'https://petretiberiu.dev/'
 locale = 'en-us'
-title = 'Tiberiu Petre - Software Engineer'
+title = 'Tiberiu Petre - Gameplay Programmer'
 theme = 'PaperMod'
 enableRobotsTXT = true
 
@@ -31,7 +31,7 @@ enableRobotsTXT = true
   cloudflareAnalyticsToken = ''
   # Contact address shown in the header next to LinkedIn/GitHub; empty = hidden.
   contactEmail = 'contact@petretiberiu.dev'
-  description = 'Tiberiu Petre — Software Engineer. Portfolio, projects, and technical writing.'
+  description = 'Tiberiu Petre — Gameplay Programmer. Portfolio, projects, and technical writing.'
 
   [params.footer]
     text = 'Written with AI assistance — see [about](/about/).'
