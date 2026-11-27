@@ -29,7 +29,7 @@ enableRobotsTXT = true
   # Cloudflare Web Analytics: cookieless, so no consent banner is needed.
   # Paste the site token from Cloudflare dashboard → Web Analytics; empty = no analytics.
   cloudflareAnalyticsToken = ''
-  # Direct contact address shown on /contact/; empty = hidden.
+  # Contact address shown in the header next to LinkedIn/GitHub; empty = hidden.
   contactEmail = 'contact@petretiberiu.dev'
   description = 'Tiberiu Petre — Software Engineer. Portfolio, projects, and technical writing.'
 
