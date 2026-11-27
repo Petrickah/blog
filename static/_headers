@@ -24,3 +24,7 @@
 /*.ico
   ! Content-Type
   Content-Type: image/x-icon
+
+/*.pdf
+  ! Content-Type
+  Content-Type: application/pdf
