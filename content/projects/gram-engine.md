@@ -16,12 +16,12 @@ The name is provisional: Gram, the sword of Sigurd, following the same philosoph
 
 ## Waves
 
-| Wave | What it produces | Devlog |
-|---|---|---|
-| **Wave 0** — Gram Build | A self-hosting, pure-Rust build tool for C++ and Rust projects. | ✅ [Episode 0: Gram Build](/posts/gram-engine-00-gram-build/) |
-| **Wave 1** — Hello Triangle | A Vulkan 1.3 triangle across three platforms, with an ImGui editor and reloadable Rust gameplay. | ✅ [Episode 1: Hello Triangle](/posts/gram-engine-01-hello-triangle/) |
-| **Wave 2** — Ray Tracer | **In progress.** *Ray Tracing in One Weekend* in a Vulkan compute shader; Rust-driven sphere entities; `.pass.ron` shader passes; SAH BVH; GPU profiler; FSR 1. Next: triangles and Blender scenes (`.obj`/`.mtl`). | [Interlude 1.5: Gram Build on Three Platforms](/posts/gram-engine-01-5-gram-build-three-platforms/) (prepares Wave 2) → [Episode 2: Ray Tracing in One Weekend on the GPU](/posts/gram-engine-02-ray-tracing-in-one-weekend-on-the-gpu/) · [Interlude 2.5: Optimizing for Real Hardware](/posts/gram-engine-02-5-optimizing-for-real-hardware/) · Episode 3 next |
-| **Wave 3+** | Raster pipeline, post-processing, asset manager, world serialization. | 🔮 Noted, unscheduled |
+| Wave | When | What it produces | Devlog |
+|---|---|---|---|
+| **Wave 0** — Gram Build | Sep 7 – Sep 17, 2026 | A self-hosting, pure-Rust build tool for C++ and Rust projects. | ✅ [Episode 0: Gram Build](/posts/gram-engine-00-gram-build/) |
+| **Wave 1** — Hello Triangle | Sep 27 – Nov 10, 2026 | A Vulkan 1.3 triangle across three platforms, with an ImGui editor and reloadable Rust gameplay. | ✅ [Episode 1: Hello Triangle](/posts/gram-engine-01-hello-triangle/) |
+| **Wave 2** — Ray Tracer | Since Nov 10, 2026 | **In progress.** *Ray Tracing in One Weekend* in a Vulkan compute shader; Rust-driven sphere entities; `.pass.ron` shader passes; SAH BVH; GPU profiler; FSR 1. Next: triangles and Blender scenes (`.obj`/`.mtl`). | [Interlude 1.5: Gram Build on Three Platforms](/posts/gram-engine-01-5-gram-build-three-platforms/) (prepares Wave 2) → [Episode 2: Ray Tracing in One Weekend on the GPU](/posts/gram-engine-02-ray-tracing-in-one-weekend-on-the-gpu/) · [Interlude 2.5: Optimizing for Real Hardware](/posts/gram-engine-02-5-optimizing-for-real-hardware/) · Episode 3 next |
+| **Wave 3+** | — | Raster pipeline, post-processing, asset manager, world serialization. | 🔮 Noted, unscheduled |
 
 A “.5” is an interlude that prepares the next full episode.
 

@@ -1,6 +1,7 @@
 ---
 title: "Gram Engine - Episode 2: Ray Tracing in One Weekend on the GPU"
 date: 2026-11-24T11:00:00+02:00
+work_period: "Nov 6 – Nov 18, 2026"
 draft: false
 series: ["gram-engine"]
 tags: [game-engine, vulkan, cplusplus, rust, hlsl, ray-tracing, compute-shader, depth-of-field, ecs, blog-series]

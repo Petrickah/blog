@@ -1,6 +1,7 @@
 ---
 title: "Gram Engine — Episode 0: Gram Build"
 date: 2026-09-16
+work_period: "Sep 7 – Sep 17, 2026"
 lastmod: 2026-11-24
 draft: false
 rssTeaser: true

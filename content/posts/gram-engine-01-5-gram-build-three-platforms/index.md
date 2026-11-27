@@ -1,6 +1,7 @@
 ---
 title: "Gram Engine - Interlude 1.5: Gram Build on Three Platforms"
 date: 2026-11-24T10:00:00+02:00
+work_period: "Nov 13 – Nov 16, 2026"
 draft: false
 rssTeaser: true
 series: ["gram-engine"]

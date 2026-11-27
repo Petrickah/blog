@@ -1,6 +1,7 @@
 ---
 title: "Gram Engine - Episode 1: Hello Triangle"
 date: 2026-11-04
+work_period: "Sep 27 – Nov 5, 2026"
 draft: false
 series: ["gram-engine"]
 tags: [game-engine, vulkan, cplusplus, rust, gram-build, imgui, ecs, cross-platform, moltenvk, blog-series]
