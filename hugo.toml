@@ -30,7 +30,7 @@ enableRobotsTXT = true
   # Paste the site token from Cloudflare dashboard → Web Analytics; empty = no analytics.
   cloudflareAnalyticsToken = ''
   # Direct contact address shown on /contact/ next to the form; empty = hidden.
-  contactEmail = ''
+  contactEmail = 'contact@petretiberiu.dev'
   description = 'Tiberiu Petre — Software Engineer. Portfolio, projects, and technical writing.'
 
   [params.footer]
