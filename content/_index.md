@@ -1,7 +1,16 @@
 ---
 title: "Tiberiu Petre"
 role: "Gameplay Programmer"
-aliases: ["/contact/", "/contact-thanks/"]
+aliases:
+  - "/contact/"
+  - "/contact-thanks/"
+  # Sovereign AI Nexus, removed 2026-11-27 (abandoned project)
+  - "/projects/sovereign-ai-nexus/"
+  - "/series/sovereign-ai-nexus/"
+  - "/posts/sovereign-ai-nexus-01-starting-small/"
+  - "/posts/sovereign-ai-nexus-02-scaffolding/"
+  - "/posts/sovereign-ai-nexus-03-making-it-talk/"
+  - "/posts/sovereign-ai-nexus-04-shipping-v1/"
 contacts:
   - label: LinkedIn
     url: https://linkedin.com/in/tiberiupetre
