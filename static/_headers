@@ -28,3 +28,11 @@
 /*.pdf
   ! Content-Type
   Content-Type: application/pdf
+
+/*.webp
+  ! Content-Type
+  Content-Type: image/webp
+
+/*.jpg
+  ! Content-Type
+  Content-Type: image/jpeg

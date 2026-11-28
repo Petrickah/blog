@@ -22,9 +22,9 @@ summary: >
   Gameplay programmer with 4 years at a global AAA game studio (Ubisoft)
   on the Assassin's Creed franchise: pre-launch bug fixing on Assassin's
   Creed Shadows, data-driven gameplay code and designer-facing tooling.
-  On the side, exploring engine
-  programming with Gram Engine, a personal C++20 and Rust engine running
-  on Vulkan 1.3.
+  On the side, exploring engine programming with Gram Engine, a personal
+  C++20 and Rust engine running on Vulkan 1.3. Open to gameplay programmer
+  roles.
 skills:
   - category: Languages
     items: ["C++", "Rust", "HLSL"]

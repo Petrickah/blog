@@ -10,6 +10,8 @@ repo: "https://github.com/Petrickah/gram-engine"
 repo_private: false
 ---
 
+![The cover scene with the optimization work](raytracing-cover-image-optimized.png)
+
 Gram Engine is a personal game engine (C++ and Rust, Vulkan), started from rediscovered passion rather than a portfolio obligation. No deadline, no stress. It is structured in **waves**: each wave produces one working artifact plus a devlog post on this blog.
 
 The name is provisional: Gram, the sword of Sigurd, following the same philosophy as Scimitar → Anvil at Ubisoft. If the engine grows enough, Gram could become Hearth. If not, the name was always fine as a working title.
@@ -25,6 +27,23 @@ The name is provisional: Gram, the sword of Sigurd, following the same philosoph
 | **Wave 4+** | — | Raster pipeline (G-buffer, shadows, lighting), post-processing, asset manager, world serialization. | 🔮 Noted, unscheduled |
 
 A “.5” is an interlude that prepares the next full episode.
+
+## How this is built
+
+I build Gram Engine with Claude Code as a pair programmer. Most commits carry a `Co-Authored-By: Claude` trailer: it marks commits Claude took part in (code, tests, docs, or just making the commit), not how much of the code is Claude's. I usually asked Claude to commit, for fast and concrete descriptions of what the change does, even when it didn't modify any code.
+
+Who did what, by area:
+
+- **[Vulkan renderer](https://github.com/Petrickah/gram-engine/tree/main/GramEngine/src/Gram/Renderer)** — mine, following the Khronos tutorial: instance, devices, surface, swapchain, images, buffers, pipelines, shader loading, the core render pass.
+- **[Ray tracer](https://github.com/Petrickah/gram-engine/blob/main/Game/Content/shaders/RayTracer.hlsl)** — the base algorithm is mine, following *Ray Tracing in One Weekend*, with Claude's guidance.
+- **C++/Rust interop** — my design; Claude implemented most of it.
+- **[Profiler](https://github.com/Petrickah/gram-engine/blob/main/GramEngine/src/Gram/Renderer/VulkanProfiler.cpp)** — the GPU timing is mine; the editor panel is Claude's.
+- **[Logging](https://github.com/Petrickah/gram-engine/blob/main/GramEngine/src/Gram/Logging/GramLogger.cpp)** — mine, reviewed by Claude.
+- **Gram Build** — mostly Claude's; I wrote the basic Rust.
+- **Editor, render targets, benchmarks** — Claude's, under my direction.
+- **Documentation** — `docs/` and `CLAUDE.md` are written by Claude, from research on the codebase. I let Claude keep its own memory there.
+
+**How we work:** the design decisions and which features to build are mine; I brainstorm them with Claude, but the final call is mine, and I review every change before it lands. When I'm stuck, Claude either changes the code directly or gives me a snippet and explains how to implement it. On complex tasks Claude works as a tutor, the senior engineer if you prefer.
 
 ## How it fits together
 
