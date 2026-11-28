@@ -9,6 +9,11 @@
     {{- $scratch.Add "meta" (slice (printf "<span title='When the work this post describes was done'>Built %s</span>" .)) }}
 {{- end }}
 
+{{- /* Site override: set `handwritten: true` in a post's frontmatter once Tiberiu has rewritten it by hand. */}}
+{{- if .Params.handwritten -}}
+    {{- $scratch.Add "meta" (slice "<span title='Rewritten by hand from an AI-assisted draft'>Rewritten by hand</span>") }}
+{{- end }}
+
 {{- if (.Param "ShowReadingTime") -}}
     {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime)))) }}
 {{- end }}
