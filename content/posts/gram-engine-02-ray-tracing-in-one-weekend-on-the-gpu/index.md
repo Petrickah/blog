@@ -46,6 +46,29 @@ The first visible bugs came from the data. A deleted sphere stayed on screen bec
 
 A filter Gemini called “FSAA” averaged nearby pixels. It blurred the image, but it was not supersampling. Supersampling means rendering at a higher resolution, then averaging the extra pixels down. I made a 2× version that traced four samples for each output pixel and kept it as a reusable post-process.
 
+```hlsl
+[shader("pixel")]
+float4 PSMain(in VSOutput input) : SV_TARGET
+{
+    float3 colorSum     = float3(0.0f, 0.0f, 0.0f);
+    float  totalSamples = ubo.ScaleFactor * ubo.ScaleFactor;
+    float2 startOffset  = -0.5f * (ubo.ScaleFactor - 1.0f) * ubo.TexelSize;
+
+    for (float x = 0; x < ubo.ScaleFactor; x += 1.0f)
+    {
+        for (float y = 0; y < ubo.ScaleFactor; y += 1.0f)
+        {
+            float2 offset = startOffset + float2(x, y) * ubo.TexelSize;
+            colorSum += _MainTexture.Sample(sampler_MainTexture, input.TexCoord + offset).rgb;
+        }
+    }
+
+    return float4(colorSum / totalSamples, 1.0f);
+}
+```
+
+*This is the second half of supersampling. The image is first rendered at `ScaleFactor` times the output resolution, and this pixel shader scales it back down: for each output pixel, it samples a `ScaleFactor × ScaleFactor` grid from the bigger image and averages the colors, dividing once by the number of samples. The rest of the anti-aliasing work is in the [full commit](https://github.com/Petrickah/gram-engine/commit/784c684450e8d48848e6b824224a52db144c615a).*
+
 I also wanted a still image to get cleaner over time. Accumulation averages each new frame with the ones before it. When a sphere moved or the scene changed, that history had to reset. Otherwise old images lingered and a new sphere seemed to fade in. Clearing the image and starting the count over fixed it.
 
 The grey result had two causes: the swapchain had already applied gamma correction, and I divided by the sample count twice. Removing those duplicate steps brought the colors back.
@@ -74,6 +97,37 @@ The first version followed the camera model in the book. For each pixel, a ray a
 
 Then I mixed up two distances. The lens's focal length is measured in millimetres; the distance to the focused subject is measured in metres. I used one setting for both, and got a 2.2 mm lens with a roughly 160-degree fisheye view. The physical camera conversion fixed this, and an editor control could exaggerate blur, which is hard to see at normal camera settings.
 
+```hlsl
+float2 RandomInUnitDisk(inout uint state)
+{
+    const float r   = sqrt(RandomFloat(state));
+    const float phi = RandomFloat(state, 0.0f, 6.28318530718f);
+    return r * float2(cos(phi), sin(phi));
+}
+
+Ray CalculateRay(in Camera cam, uint2 pixel, uint2 size)
+{
+    const float2 jitter = float2(RandomFloat(g_Seed), RandomFloat(g_Seed));
+
+    float2  pixelSample = (pixel + jitter) / float2(size) * 2.0f - 1.0f;
+    pixelSample.y = -pixelSample.y;
+
+    const float3 pinhole    = cam.Forward
+                            + pixelSample.x * cam.Aspect * cam.TanHalfFovY * cam.Right
+                            + pixelSample.y *              cam.TanHalfFovY * cam.Up
+                            ;
+    const float3 focusPoint = cam.Position + cam.FocusDistance * pinhole;
+    const float2 lens       = cam.LensRadius * RandomInUnitDisk(g_Seed);
+
+    Ray ray;
+    ray.Origin    = cam.Position + lens.x * cam.Right + lens.y * cam.Up;
+    ray.Direction = normalize(focusPoint - ray.Origin);
+    return ray;
+}
+```
+
+*Depth of field through a thin lens. Instead of starting every ray from a single point, each ray starts from a random point on a disk the size of the lens (`LensRadius`) and still aims at the same point on the focus plane. Objects at the focus distance stay sharp; anything closer or farther blurs. The complete code is in the [full commit](https://github.com/Petrickah/gram-engine/commit/fab972be202333db946cb64e02c4151bdaaf0521).*
+
 ![Depth of field produced by rays passing through a lens](raytracing-cover-depth-of-field-original.png)
 
 I also tried the game-engine approach: render the image first, then blur it using a depth image to tell which parts are in focus. It can make the picture look out of focus, but it cannot reveal what a blurred foreground object hid behind itself. That is the trade-off: the lens changes the rays before they hit the scene; the post-process only has the image already rendered.
@@ -89,6 +143,25 @@ The spheres began as a list inside the ray tracer. I moved them into the engine'
 The GPU still needed its data in compact arrays. Each frame, the engine packs the `World` for the ray tracer and compares it with the previous version. Accumulation resets only when the scene really changes. One apparent ghost sphere was simpler than it looked: Play had rebuilt the Rust library, but the C++ game was still an old binary.
 
 Then Rust started moving the scene. A system in `bob.rs` moves the small spheres up and down while the game runs. Pause lets the image accumulate again; Stop puts the spheres back. Seeing the objects move made the new engine plumbing feel less like plumbing.
+
+```rust
+use crate::prelude::*;
+
+/// Every small sphere bobs up and down: y follows y0 + A·sin(t + phase), written as a change per frame
+/// (the derivative, A·cos(t + phase)·dt), since the component only holds the current y.
+pub(crate) fn bob(time: Time, delta_time: DeltaTime, spheres: Query<Sphere>) {
+    const AMPLITUDE: f32 = 0.25;
+    let t = *time as f32;
+
+    for (i, (_, mut sphere)) in spheres.iter_mut().enumerate() {
+        if sphere.radius > 10.0 { continue; }   // the ground (radius 1000) stays put
+        let phase = i as f32 * 0.7;
+        sphere.center.y += AMPLITUDE * (t + phase).cos() * *delta_time;
+    }
+}
+```
+
+*A Rust gameplay system. Each frame it gets the time and the frame's delta time, walks every sphere entity and skips the large ones (radius above 10, which is the ground). Each small sphere should follow `y = y0 + A·sin(t + phase)`, but the component only stores the current height, so the system adds this frame's change instead: the derivative, `Δy = A·cos(t + phase)·dt`. That is why the code uses a cosine. See the [full commit](https://github.com/Petrickah/gram-engine/commit/8ad9708f9e4240a613da27236f3f6cd759137914).*
 
 I wrote the vector type, components, typed World access, scene packing, Rust iteration and `bob`, often starting from guided snippets. Claude wrote the engine-to-Rust iteration step and a component lifetime constraint.
 

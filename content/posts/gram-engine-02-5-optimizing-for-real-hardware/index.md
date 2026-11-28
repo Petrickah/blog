@@ -24,6 +24,41 @@ The ground sphere was so large that its box made the other boxes less useful, so
 
 I wrote the first heat-map shader and its box and sphere counters. Claude added the checkbox. The next day, Claude refactored the view for captures, adding thresholds and a `Whole path` mode. The view made the improvement visible: without the BVH, even a ray through the sky tested all 486 spheres. With it, the sky needed only a box test and the ground sphere.
 
+```hlsl
+// The primary ray's cost (PrimaryHit just ran one HitSpheres for this pixel), against the thresholds:
+// Whole path: the counts of every bounce of this frame's paths (the image's own, jittered and random), per
+// sample. Noisy frame to frame, so the accumulation averages it into each pixel's mean cost, and the
+// shapes come out of that average: no shading needed. Otherwise, the camera's ray only (PrimaryHit above).
+if (Params.DebugWholePath != 0)
+{
+    g_BoxTests    = 0;
+    g_SphereTests = 0;
+    for (uint sampleCount = 0; sampleCount < Params.Samples; sampleCount++)
+    {
+        RayColor(CalculateRay(Params, id.xy, uint2(width, height)), float3(1.0f, 1.0f, 1.0f), float3(0.5f, 0.7f, 1.0f));
+    }
+    g_BoxTests    /= Params.Samples;
+    g_SphereTests /= Params.Samples;
+}
+
+// The cost against the thresholds:
+// 1 = full color, past 1 = white. One measure (box or sphere tests) as a ramp black → blue → red, or both
+// at once, boxes in red and spheres in blue.
+const float boxes   = float(g_BoxTests)    / float(max(Params.BoxThreshold,    1u));
+const float spheres = float(g_SphereTests) / float(max(Params.SphereThreshold, 1u));
+
+float3 heat;
+if (Params.DebugView == 3) heat = (boxes > 1.0f || spheres > 1.0f) ? float3(1.0f, 1.0f, 1.0f) : float3(boxes, 0.0f, spheres);
+else                       heat = HeatRamp(Params.DebugView == 1 ? boxes : spheres);
+
+// The camera's ray only: shaded by the surface it hit (a light from above), so the shapes show even where
+// every pixel costs the same (no BVH: 486 sphere tests everywhere); the sky stays unshaded.
+const float shade = (primaryHits && Params.DebugWholePath == 0) ? 0.3f + 0.7f * saturate(dot(primaryHit.Normal, normalize(float3(0.4f, 1.0f, 0.3f)))) : 1.0f;
+Result[id.xy] = float4(heat * shade, 1.0f);
+```
+
+*Every intersection check counts how many box or sphere tests it does. The code then samples along the path and adjusts the number for the whole path. The counts are normalized to the threshold values and become a value for the blue (for the sphere intersection tests) or red (for the box intersection tests) channel. For the entire code you can check the [full commit](https://github.com/Petrickah/gram-engine/commit/92c0f9756d942f23fb3e2ae91afee2bb708ab8b2)*
+
 ![Heat map without the BVH, in Whole path mode](raytracing-cover-heatmap-no-bvh-2874-sphere-checks.png)
 
 *Whole path follows every bounce and averages the counts across frames. Blue marks sphere tests. Each segment checks all 486 spheres, so this image mostly shows path length. Even rays through the sky make all 486 tests, which is why it stays dark blue. A pixel reaches white at the threshold of 2,874 sphere tests, about six segments within the capture's 10-bounce limit. The white patches under and between spheres, and through the glass, mark rays that bounce many times before escaping.*
@@ -37,6 +72,66 @@ I wrote the first heat-map shader and its box and sphere counters. Claude added 
 Then the FPS stopped climbing. The heat map showed that the search was no longer the main cost. At 1× resolution, four bounces and one sample, the scene reached 86 FPS. The next gains had to come from tracing fewer pixels or doing less work per ray.
 
 I also tried a surface-area heuristic, or SAH. Instead of splitting a group in half, it compares the surface area of the boxes and how many spheres each split would contain. I wrote it and changed the traversal to test the nearer child first, working from guided snippets. At 1×, six bounces and one sample, the midpoint tree reached 46 FPS and SAH reached 49. The difference was small on a regular grid of spheres, but that did not make the more careful split useless; uneven geometry would give it more to work with.
+
+```cpp
+// The middle of the box's longest axis: always cuts (a node whose centers all land on one side is cut by
+// index in Split).
+bool BVHTree::MidpointCut(const AABBBox& box, int& axis, float& cut)
+{
+    const glm::vec3 extent = box.Max - box.Min;
+    axis = 0;
+    if (extent.y > extent[axis]) axis = 1;
+    if (extent.z > extent[axis]) axis = 2;
+    cut = 0.5f * (box.Min[axis] + box.Max[axis]);
+    return true;
+}
+
+bool BVHTree::SahCut(std::span<const SphereData> spheres, size_t first, size_t count, const AABBBox& nodeBox, int& outAxis, float& outCut)
+{
+    // Every sphere goes into one of 8 equal slices ("bins") of the centers' range, per axis; each of the 7
+    // planes between slices is a candidate cut, priced by SAH: a child's cost = its surface area (how likely
+    // a ray enters it) x its sphere count (what it then tests), relative to this node's area.
+    constexpr int bins = 8;
+    float bestCost = static_cast<float>(count);   // making this node a leaf: test all its spheres
+    int   bestAxis = -1;
+    float bestCut  = 0.0f;
+
+    for (int axis = 0; axis < 3; axis++)
+    {
+        float lo = std::numeric_limits<float>::max(), hi = -lo;   // the range of the centers on this axis
+        for (size_t i = first; i < first + count; i++) { lo = std::min(lo, spheres[i].Position[axis]); hi = std::max(hi, spheres[i].Position[axis]); }
+        if (hi - lo < 1e-6f) continue;                            // every center in one place: no cut on this axis
+
+        std::array<AABBBox, bins> box;   box.fill(AABBBox::EmptyBox());
+        std::array<uint32_t, bins> n {};
+        for (size_t i = first; i < first + count; i++)
+        {
+            const int b = std::min(bins - 1, static_cast<int>((spheres[i].Position[axis] - lo) / (hi - lo) * bins));
+            box[b] = box[b].Grow(SphereToAABB(spheres[i]));
+            n[b]++;
+        }
+
+        for (int cut = 1; cut < bins; cut++)   // the plane between slice cut - 1 and slice cut
+        {
+            AABBBox left = AABBBox::EmptyBox(), right = AABBBox::EmptyBox();
+            uint32_t nl = 0, nr = 0;
+            for (int b = 0;   b < cut;  b++) { if (n[b]) { left  = left.Grow(box[b]);  nl += n[b]; } }
+            for (int b = cut; b < bins; b++) { if (n[b]) { right = right.Grow(box[b]); nr += n[b]; } }
+            if (nl == 0 || nr == 0) continue;
+
+            // 1 = the cost of visiting the node
+            const float cost = 1.0f + (AABBBox::Area(left) * nl + AABBBox::Area(right) * nr) / AABBBox::Area(nodeBox);
+            if (cost < bestCost) { bestCost = cost; bestAxis = axis; bestCut = lo + (hi - lo) * cut / bins; }
+        }
+    }
+
+    outAxis = bestAxis;
+    outCut  = bestCut;
+    return bestAxis >= 0;   // no cut cheaper than testing everything: keep it a leaf
+}
+```
+
+*The most important part of the algorithm is the SAH (Surface Area Heuristic) which cuts each axis in eight slices, evaluates the heuristic and keeps the cheapest cost. The heuristic is the sum of the cost of visiting the node plus for each child, the probability a ray enters it (the ratio of its child and the parent node) times the number of spheres it needs to test. If no more cuts give a better split, the node becomes a leaf (with no children). For the entire code you can check the [full commit](https://github.com/Petrickah/gram-engine/commit/d38b527ca4f2c515fcef7286dc6287b684b27519)*
 
 I tried shrinking the GPU's traversal stack from 32 slots to 16. In Debug, FPS nearly doubled. The tree was only nine levels deep, so 16 slots were enough. The dynamically indexed stack did not stay in fast registers; it spilled into slower memory. The validator now rejects a tree that is too deep for the stack, because a GPU write past the end can silently corrupt data instead of crashing.
 
