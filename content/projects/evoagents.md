@@ -6,6 +6,7 @@ weight: 20
 featured: true
 summary: "AI framework using behavior trees for NPC decision-making — an action-adventure game with procedurally generated terrain, built as a bachelor's thesis."
 repo: "https://github.com/Petrickah/EvoAgents"
+repo_private: true
 ---
 
 EvoAgents ("Rabbit Catcher") is a video game built for my Bachelor's thesis, centered on an asynchronous Behavior Tree implementation for NPC AI.

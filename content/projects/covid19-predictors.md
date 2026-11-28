@@ -4,6 +4,7 @@ subtitle: "university project, two repos"
 date: 2021-10-12
 weight: 80
 featured: false
+earlier: true
 summary: "Two coursework predictors for COVID-19 case trends — a neural network compared against ARIMA and Prophet in one, a scikit-learn regression model reframed as OHLC-style candles in the other."
 ---
 

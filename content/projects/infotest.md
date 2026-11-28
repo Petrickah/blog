@@ -4,6 +4,7 @@ subtitle: "university project"
 date: 2021-10-12
 weight: 30
 featured: false
+earlier: true
 summary: "HackerRank-style code evaluation platform — Python-based evaluator, Laravel/PHP/MySQL backend, Dockerized. Applied, academic-scope SQL/backend experience."
 repo: "https://github.com/Petrickah/InfoTest"
 ---

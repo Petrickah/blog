@@ -8,6 +8,8 @@ featured: true
 summary: "A personal C++20 and Rust game engine on Vulkan 1.3. Wave 0 built a self-hosting build tool; Wave 1 delivered a cross-platform triangle and reloadable gameplay. Wave 2 delivered a compute-shader ray tracer with Rust-driven spheres, BVH, GPU profiling and FSR 1. Wave 3 is in progress: triangles and a Blender scene (.obj/.mtl)."
 repo: "https://github.com/Petrickah/gram-engine"
 repo_private: false
+release_url: "https://github.com/Petrickah/gram-engine/releases/tag/v0.1.0"
+release_note: "0.1.0 preview, macOS and Windows"
 ---
 
 ![The cover scene with the optimization work](raytracing-cover-image-optimized.png)

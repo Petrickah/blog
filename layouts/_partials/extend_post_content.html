@@ -5,3 +5,6 @@
 <p><a href="{{ . }}" target="_blank" rel="noopener noreferrer">View source on GitHub &rarr;</a></p>
 {{- end }}
 {{- end }}
+{{- with .Params.release_url }}
+<p><a href="{{ . }}" target="_blank" rel="noopener noreferrer">Download a build &rarr;</a>{{ with $.Params.release_note }} ({{ . }}){{ end }}</p>
+{{- end }}

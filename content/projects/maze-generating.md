@@ -4,6 +4,7 @@ subtitle: "university coursework, C++"
 date: 2019-02-22
 weight: 90
 featured: false
+earlier: true
 summary: "A randomized depth-first-search maze generator, animated live in a Windows console, with Dijkstra's algorithm tracing the shortest path once generation finishes."
 repo: "https://github.com/Petrickah/maze-generating"
 ---

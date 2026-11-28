@@ -6,9 +6,13 @@ weight: 50
 featured: true
 summary: "A Game Off 2021 jam entry — an action-adventure chapter where a spell-casting sorceress fights off a spider infestation in rural Australia, built solo in Unreal Engine within the jam's one-month window."
 repo: "https://github.com/Petrickah/game-off-2021"
+release_url: "https://github.com/Petrickah/game-off-2021/releases/tag/v0.08.12-alpha"
+release_note: "playable, Windows and Linux, about 920 MB"
 ---
 
 Cindy's Adventures — Spiders in Australia was my entry for [Game Off 2021](https://itch.io/jam/game-off-2021), itch.io's annual month-long game jam. The player is Cynthia Stewart, a sorceress out of Medieval England, dropped into a forgotten rural corner of Australia that turns out to be infested with spiders that keep spawning and coming after her.
+
+![Cynthia in the Australian outback, with the health and mana bars, in game](cover.png)
 
 ## Combat
 

@@ -4,6 +4,7 @@ subtitle: "personal project, Laravel"
 date: 2020-02-02
 weight: 60
 featured: false
+earlier: true
 summary: "A Laravel 6 content-management system built around a plugin/theme architecture — service-provider-based plugins and swappable themes instead of hardcoded features."
 repo: "https://github.com/Petrickah/EvoCMS"
 ---

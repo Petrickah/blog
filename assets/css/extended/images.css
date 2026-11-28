@@ -3,3 +3,8 @@
 .post-content img {
   height: auto;
 }
+
+.projects-earlier {
+  margin: 2.5em 0 1em;
+  font-size: 1.3em;
+}
