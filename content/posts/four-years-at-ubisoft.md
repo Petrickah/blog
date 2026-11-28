@@ -2,6 +2,7 @@
 title: "Four Years at Ubisoft on Assassin's Creed"
 date: 2026-08-24
 lastmod: 2026-11-27
+handwritten: true
 draft: false
 categories: ["Game Development"]
 tags: ["career", "ubisoft", "assassins-creed", "gamedev"]
