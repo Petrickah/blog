@@ -3,6 +3,8 @@ name: Deploy to Cloudflare
 on:
   push:
     branches: [main]
+  # Manual re-run from the Actions tab, for when a push event gets lost.
+  workflow_dispatch:
 
 jobs:
   deploy:
