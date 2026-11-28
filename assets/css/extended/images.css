@@ -1,0 +1,5 @@
+/* The WebP render hook sets width/height attributes (so the page doesn't jump while
+   images load); with max-width: 100% from the theme, the height must follow the width. */
+.post-content img {
+  height: auto;
+}
